@@ -85,7 +85,7 @@ if [ ! -d node_modules ]; then
 fi
 
 echo "[start_all] Starting Node bridge (background)"
-env C_SERVER_HOST="$C_SERVER_HOST" C_SERVER_PORT="$C_SERVER_PORT" BRIDGE_WS_PORT="$BRIDGE_WS_PORT" BRIDGE_API_PORT="$BRIDGE_API_PORT" nohup node server.js > "$LOGDIR/bridge.log" 2>&1 &
+env C_SERVER_HOST="$C_SERVER_HOST" C_SERVER_PORT="$C_SERVER_PORT" BRIDGE_WS_PORT="$BRIDGE_WS_PORT" BRIDGE_API_PORT="$BRIDGE_API_PORT" nohup node bridge.js > "$LOGDIR/bridge.log" 2>&1 &
 echo $! > "$LOGDIR/bridge.pid"
 
 sleep 1

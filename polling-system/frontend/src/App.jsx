@@ -74,6 +74,15 @@ export default function App() {
   const path = typeof window !== 'undefined' ? window.location.pathname : '/'
 
   if (path.startsWith('/client')) {
+    // support /client?clientId=... to open a single-client dashboard page
+    try {
+      const sp = typeof window !== 'undefined' ? new URL(window.location.href).searchParams : null
+      const clientId = sp ? sp.get('clientId') : null
+      if (clientId) {
+        const ClientPage = require('./components/ClientPage').default
+        return <ClientPage clientId={clientId} onSend={sendToBridge} logs={logs} />
+      }
+    } catch (e) {}
     return (
       <div className="h-screen p-3">
         <div className="mb-3 flex items-center justify-between">

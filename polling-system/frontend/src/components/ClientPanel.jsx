@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import ClientConsole from './ClientConsole'
+import TerminalLog from './TerminalLog'
 
 export default function ClientPanel({ onSend, clients: bridgeClients = {}, logs = [] }) {
   const [localClients, setLocalClients] = useState([])
@@ -31,6 +32,11 @@ export default function ClientPanel({ onSend, clients: bridgeClients = {}, logs 
         {localClients.map(c => (
           <ClientConsole key={c.id} client={c} onSend={onSend} onRemove={() => removeClient(c.id)} logs={logs} />
         ))}
+      </div>
+
+      <div className="mt-2">
+        <div className="font-semibold">Client Simulator Logs</div>
+        <TerminalLog logs={logs.filter(l => localClients.find(x => x.id === l.clientId))} />
       </div>
 
       <div className="mt-2">

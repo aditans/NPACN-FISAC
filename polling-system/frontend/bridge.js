@@ -1,4 +1,4 @@
-/* Node bridge server
+/* Node bridge server (renamed bridge.js)
  * - Connects to C TCP server at localhost:8080
  * - Exposes WebSocket server on port 3001 for frontend
  * - Forwards server events to connected browser clients and accepts actions

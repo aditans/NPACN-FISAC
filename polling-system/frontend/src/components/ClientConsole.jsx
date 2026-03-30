@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import API_BASE from '../apiBase'
+import TerminalLog from './TerminalLog'
 
 export default function ClientConsole({ client, onSend, onRemove, logs = [] }) {
   const [connected, setConnected] = useState(false)
@@ -13,6 +15,11 @@ export default function ClientConsole({ client, onSend, onRemove, logs = [] }) {
     newLogs.forEach(l => {
       if (l.clientId === client.id && l.type === 'DATA_RECEIVED') {
         setMessages(m => [...m, { from: 'server', text: l.data }])
+        added = true
+      }
+      // show bridge LOG events (like VOTE commands) in the client console
+      if (l.type === 'LOG' && l.subtype === 'VOTE' && l.clientId === client.id) {
+        setMessages(m => [...m, { from: 'info', text: l.message }])
         added = true
       }
     })
@@ -46,7 +53,7 @@ export default function ClientConsole({ client, onSend, onRemove, logs = [] }) {
   // Polls for this client (to show in-console voting widget)
   const [polls, setPolls] = useState([])
   useEffect(() => {
-    fetch(`/polls?userId=${encodeURIComponent(client.id)}`)
+    fetch(`${API_BASE}/polls?userId=${encodeURIComponent(client.id)}`)
       .then(r => r.json())
       .then(j => setPolls(j.polls || []))
       .catch(() => {})
@@ -59,7 +66,7 @@ export default function ClientConsole({ client, onSend, onRemove, logs = [] }) {
     // append to console
     setMessages(m => [...m, { from: 'me', text: cmd }])
     // call bridge API to register vote (acts as server-side vote)
-    fetch(`/polls/${pollId}/vote`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: client.id, choiceId }) })
+    fetch(`${API_BASE}/polls/${pollId}/vote`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: client.id, choiceId }) })
       .then(r => r.json())
       .then(j => {
         if (!j.ok) {
@@ -86,6 +93,11 @@ export default function ClientConsole({ client, onSend, onRemove, logs = [] }) {
         {messages.map((m, i) => (
           <div key={i} className={m.from === 'me' ? 'text-right text-blue-300' : 'text-left text-gray-300'}>{m.text}</div>
         ))}
+      </div>
+
+      {/* Terminal log panel filtered for this client */}
+      <div className="mb-2">
+        <TerminalLog logs={logs.filter(l => l.clientId === client.id || (l.type === 'LOG' && l.clientId === client.id))} />
       </div>
 
       {/* Poll widget for this client */}
