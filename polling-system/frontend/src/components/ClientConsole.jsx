@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import API_BASE from '../apiBase'
 import TerminalLog from './TerminalLog'
 
-export default function ClientConsole({ client, onSend, onRemove, logs = [] }) {
+export default function ClientConsole({ client, onSend, onRemove, logs = [], connectedOverride }) {
   const [connected, setConnected] = useState(false)
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
@@ -29,8 +29,10 @@ export default function ClientConsole({ client, onSend, onRemove, logs = [] }) {
     }
   }, [logs, client.id])
 
+  const isConnected = typeof connectedOverride === 'boolean' ? connectedOverride : connected
+
   function toggle() {
-    if (!connected) {
+    if (!isConnected) {
       // request bridge to create simulated client
       onSend({ action: 'SIM_CONNECT', clientId: client.id })
       setMessages(m => [...m, { from: 'info', text: 'Connecting...' }])
@@ -74,25 +76,40 @@ export default function ClientConsole({ client, onSend, onRemove, logs = [] }) {
         } else {
           setMessages(m => [...m, { from: 'info', text: `vote registered: ${choiceId}` }])
           // refresh polls
-          fetch(`/polls?userId=${encodeURIComponent(client.id)}`).then(r => r.json()).then(j => setPolls(j.polls || [])).catch(()=>{})
+          fetch(`${API_BASE}/polls?userId=${encodeURIComponent(client.id)}`).then(r => r.json()).then(j => setPolls(j.polls || [])).catch(()=>{})
         }
       }).catch(e => setMessages(m => [...m, { from: 'info', text: 'vote network error' }]))
   }
 
   return (
-    <div className="bg-[#111827] p-3 rounded">
-      <div className="flex items-center justify-between mb-2">
-        <div className="font-medium">{client.id}</div>
+    <div className="bg-[#111827] p-3 rounded border border-gray-800">
+      <div className="flex items-center justify-between mb-3">
+        <div>
+          <div className="font-medium">{client.id}</div>
+          <div className="text-xs text-gray-400">Command Console</div>
+        </div>
         <div className="flex items-center gap-2">
-          <div className={`w-3 h-3 rounded-full ${connected ? 'bg-green-400' : 'bg-red-400'}`}></div>
-          <button className="px-2 py-1 bg-gray-700 rounded text-sm" onClick={toggle}>{connected ? 'Disconnect' : 'Connect'}</button>
+          <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-400' : 'bg-red-400'}`}></div>
+          <button className="px-2 py-1 bg-gray-700 rounded text-sm" onClick={toggle}>{isConnected ? 'Disconnect' : 'Connect'}</button>
         </div>
       </div>
 
-      <div className="h-36 overflow-auto bg-black p-2 mb-2 text-sm font-mono" style={{ background: '#0d0d0d' }}>
+      <div className="h-40 overflow-auto bg-black border border-gray-800 p-2 mb-2 text-sm font-mono rounded" style={{ background: '#0d0d0d' }}>
         {messages.map((m, i) => (
-          <div key={i} className={m.from === 'me' ? 'text-right text-blue-300' : 'text-left text-gray-300'}>{m.text}</div>
+          <div key={i} className={m.from === 'me' ? 'text-right text-blue-300' : 'text-left text-gray-300'}>
+            {m.from === 'me' ? '$ ' : '› '} {m.text}
+          </div>
         ))}
+      </div>
+
+      <div className="mb-3 flex gap-2">
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Enter command (e.g., PING, VOTE poll-1 go)"
+          className="flex-1 bg-gray-900 border border-gray-700 p-2 rounded text-sm font-mono"
+        />
+        <button onClick={send} className="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded">Run</button>
       </div>
 
       {/* Terminal log panel filtered for this client */}
@@ -101,24 +118,19 @@ export default function ClientConsole({ client, onSend, onRemove, logs = [] }) {
       </div>
 
       {/* Poll widget for this client */}
-      <div className="bg-[#0b1220] p-2 rounded mb-2 text-sm">
+      <div className="bg-[#0b1220] border border-gray-800 p-2 rounded mb-2 text-sm">
         <div className="font-semibold mb-1">Live Polls</div>
         {polls.length === 0 && <div className="text-gray-400">No polls</div>}
         {polls.map(p => (
-          <div key={p.id} className="mb-2">
-            <div className="text-sm mb-1">{p.question}</div>
-            <div className="flex gap-2">
+          <div key={p.id} className="mb-2 rounded bg-[#0f172a] border border-gray-800 p-2">
+            <div className="text-sm mb-2">{p.question}</div>
+            <div className="flex gap-2 flex-wrap">
               {p.choices.map(c => (
-                <button key={c.id} disabled={!!p.userVote} onClick={() => vote(p.id, c.id)} className="px-2 py-1 bg-blue-600 rounded text-xs">{p.userVote === c.id ? 'Voted' : c.label}</button>
+                <button key={c.id} disabled={!!p.userVote} onClick={() => vote(p.id, c.id)} className="px-2 py-1 bg-blue-600 hover:bg-blue-500 rounded text-xs disabled:opacity-50">{p.userVote === c.id ? 'Voted' : c.label}</button>
               ))}
             </div>
           </div>
         ))}
-      </div>
-
-      <div className="flex gap-2">
-        <input value={input} onChange={(e) => setInput(e.target.value)} className="flex-1 bg-gray-800 p-2 rounded text-sm" />
-        <button onClick={send} className="px-3 py-2 bg-blue-600 rounded">Send</button>
       </div>
     </div>
   )

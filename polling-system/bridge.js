@@ -1,13 +1,23 @@
-// Bridge has been moved to the repository root at `polling-system/bridge.js`.
-// This small shim prevents the full backend source from being served by Vite
-// when the frontend dev server is running. Run the bridge with:
-//   (from project root) ./polling-system/scripts/start_all.sh
-// or from the frontend folder:
-//   NODE_PATH=./node_modules node ../bridge.js
+/* Node bridge server (moved to polling-system/bridge.js)
+ * - Connects to C TCP server at localhost:8080
+ * - Exposes WebSocket server on port 3001 for frontend
+ * - Forwards server events to connected browser clients and accepts actions
+ */
 
-console.warn('[bridge shim] bridge moved to ../bridge.js; run the start script or use the frontend npm bridge script');
+// single import and config
+const net = require('net');
+const tls = require('tls');
+const WebSocket = require('ws');
 
-module.exports = {};
+const TARGET_HOST = process.env.C_SERVER_HOST || '127.0.0.1';
+const TARGET_PORT = process.env.C_SERVER_PORT ? parseInt(process.env.C_SERVER_PORT) : 8080;
+const WS_PORT = process.env.BRIDGE_WS_PORT ? parseInt(process.env.BRIDGE_WS_PORT) : 3001;
+const C_SERVER_TLS = (process.env.C_SERVER_TLS === '1' || process.env.C_SERVER_TLS === 'true') || TARGET_PORT === 8443;
+const C_SERVER_TLS_INSECURE = (process.env.C_SERVER_TLS_INSECURE === '1' || process.env.C_SERVER_TLS_INSECURE === 'true');
+
+console.log('[bridge] Starting Node bridge - will connect to', TARGET_HOST + ':' + TARGET_PORT);
+
+// Map of simulated clients: clientId -> socket
 const simulatedClients = {};
 
 // Setup SQLite persistence for polls/votes

@@ -9,3 +9,24 @@ nohup: ignoring input
 
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
+8:54:22 AM [vite] hmr update /src/components/ClientPanel.jsx
+8:56:57 AM [vite] hmr update /src/components/ClientPanel.jsx
+8:59:28 AM [vite] hmr update /src/App.jsx
+9:03:36 AM [vite] hmr update /src/components/ServerDashboard.jsx
+9:05:34 AM [vite] hmr update /src/App.jsx
+9:11:22 AM [vite] hmr update /src/App.jsx
+9:11:55 AM [vite] hmr update /src/components/TerminalLog.jsx
+9:12:08 AM [vite] hmr update /src/components/ConnectionTable.jsx
+9:19:37 AM [vite] hmr update /src/components/Polls.jsx
+9:19:58 AM [vite] hmr update /src/components/PollSummary.jsx
+9:20:21 AM [vite] hmr update /src/components/ClientConsole.jsx
+9:20:34 AM [vite] hmr update /src/components/ServerDashboard.jsx
+9:23:30 AM [vite] hmr update /src/App.jsx
+9:23:55 AM [vite] hmr update /src/components/ClientConsole.jsx
+9:33:47 AM [vite] hmr update /src/App.jsx
+9:43:01 AM [vite] hmr update /src/App.jsx
+9:43:14 AM [vite] hmr update /src/App.jsx
+9:43:21 AM [vite] hmr update /src/App.jsx
+9:43:35 AM [vite] hmr update /src/components/ServerDashboard.jsx
+9:43:46 AM [vite] hmr update /src/components/ConnectionTable.jsx
+9:47:39 AM [vite] hmr update /src/App.jsx

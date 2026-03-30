@@ -1,13 +1,11 @@
+nohup: ignoring input
 
 > polling-frontend@0.1.0 dev
 > vite
 
 [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
-Port 5173 is in use, trying another one...
 
-  VITE v5.4.21  ready in 292 ms
+  VITE v5.4.21  ready in 538 ms
 
-  ➜  Local:   http://localhost:5174/
+  ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
-8:03:14 AM [vite] vite.config.js changed, restarting server...
-8:03:15 AM [vite] server restarted.

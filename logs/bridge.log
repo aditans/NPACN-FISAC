@@ -8,7 +8,7 @@ Error: listen EADDRINUSE: address already in use :::3001
     at listenInCluster (node:net:1959:12)
     at Server.listen (node:net:2061:7)
     at new WebSocketServer (/home/kali/Documents/NPACN-FISAC/polling-system/frontend/node_modules/ws/lib/websocket-server.js:106:20)
-    at Object.<anonymous> (/home/kali/Documents/NPACN-FISAC/polling-system/frontend/server.js:99:13)
+    at Object.<anonymous> (/home/kali/Documents/NPACN-FISAC/polling-system/bridge.js:99:13)
     at Module._compile (node:internal/modules/cjs/loader:1529:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
     at Module.load (node:internal/modules/cjs/loader:1275:32)

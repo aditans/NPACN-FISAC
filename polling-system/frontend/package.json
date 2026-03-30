@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-  "bridge": "node bridge.js",
+  "bridge": "NODE_PATH=./node_modules node ../bridge.js",
     "start": "concurrently \"npm run bridge\" \"npm run dev\""
   },
   "dependencies": {
