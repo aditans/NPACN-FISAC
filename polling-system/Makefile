@@ -10,18 +10,18 @@
 # Requirements:
 #  - GCC/Clang with C99 support
 #  - OpenSSL development libraries (libssl-dev)
-#  - SQLite3 development libraries (libsqlite3-dev)
+#  - Cosmos prechecks use standard socket/DNS libraries (no sqlite3-dev)
 #  - POSIX threads (pthreads)
 #
 # On Ubuntu/Debian:
-#  sudo apt-get install libssl-dev libsqlite3-dev
+#  sudo apt-get install libssl-dev
 #
 # On macOS:
-#  brew install openssl sqlite3
+#  brew install openssl
 
 CC           = gcc
 CFLAGS       = -Wall -Wextra -std=c99 -Iinclude -g -O2
-LDFLAGS      = -lpthread -lsqlite3 -lssl -lcrypto -lm
+LDFLAGS      = -lpthread -lssl -lcrypto -lm
 WARNINGS     = -Wpedantic -Wshadow -Wunreachable-code
 
 # Source files

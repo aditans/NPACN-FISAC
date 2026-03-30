@@ -153,7 +153,7 @@ typedef struct {
     poll_t* polls;
     uint32_t poll_count;
     pthread_rwlock_t polls_lock;
-    int db_fd;  /* SQLite database file descriptor */
+    int db_fd;  /* Database backend readiness marker */
     char db_path[256];
     int log_facility;  /* Syslog facility */
 } polling_server_t;
