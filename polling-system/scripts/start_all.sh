@@ -57,6 +57,39 @@ else
 fi
 echo "[start_all] Bridge WS port: $BRIDGE_WS_PORT API port: $BRIDGE_API_PORT"
 
+stop_if_running() {
+  local name="$1"
+  local pid_file="$LOGDIR/${name}.pid"
+  if [ ! -f "$pid_file" ]; then
+    return
+  fi
+
+  local pid
+  pid=$(cat "$pid_file" 2>/dev/null || true)
+  if [ -z "$pid" ]; then
+    rm -f "$pid_file"
+    return
+  fi
+
+  if kill -0 "$pid" >/dev/null 2>&1; then
+    echo "[start_all] Stopping existing $name process ($pid)"
+    kill "$pid" >/dev/null 2>&1 || true
+    sleep 1
+    if kill -0 "$pid" >/dev/null 2>&1; then
+      kill -9 "$pid" >/dev/null 2>&1 || true
+    fi
+  else
+    echo "[start_all] Removing stale $name pid file ($pid)"
+  fi
+
+  rm -f "$pid_file"
+}
+
+echo "[start_all] Cleaning up previously started services (if any)"
+stop_if_running polling_server
+stop_if_running bridge
+stop_if_running frontend
+
 cd "$ROOT/polling-system"
 
 echo "[start_all] Building C server (make)"
@@ -92,7 +125,7 @@ sleep 1
 
 echo "[start_all] Starting frontend dev server (background)"
 # Start Vite dev server in background; can also run in foreground by removing &
-nohup npm run dev > "$LOGDIR/frontend.log" 2>&1 &
+nohup npm run dev -- --host 0.0.0.0 --port "$FRONTEND_PORT" > "$LOGDIR/frontend.log" 2>&1 &
 echo $! > "$LOGDIR/frontend.pid"
 
 sleep 1
