@@ -1,0 +1,29 @@
+[bridge] Starting Node bridge - will connect to 127.0.0.1:8080
+node:events:502
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1902:16)
+    at listenInCluster (node:net:1959:12)
+    at Server.listen (node:net:2061:7)
+    at new WebSocketServer (/home/kali/Documents/NPACN-FISAC/polling-system/frontend/node_modules/ws/lib/websocket-server.js:106:20)
+    at Object.<anonymous> (/home/kali/Documents/NPACN-FISAC/polling-system/frontend/server.js:21:13)
+    at Mod[bridge] Frontend connected via WebSocket
+[bridge] Frontend connected via WebSocket
+[bridge] simulated client error client-1774867738050 connect ECONNREFUSED 127.0.0.1:8080
+s/loader:1275:32)
+    at Module._load (node:internal/modules/cjs/loader:1096:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+Emitted 'error' event on WebSocketServer instance at:
+    at Server.emit (node:events:524:28)
+    at emitErrorNT (node:net:1938:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v20.19.4

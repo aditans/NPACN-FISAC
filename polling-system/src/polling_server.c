@@ -257,9 +257,9 @@ polling_server_t* polling_server_create(uint16_t port, int max_clients) {
         return NULL;
     }
 
-    /* Initialize mutexes and rwlocks */
+    /* Initialize mutexes */
     pthread_mutex_init(&server->clients_lock, NULL);
-    pthread_rwlock_init(&server->polls_lock, NULL);
+    pthread_mutex_init(&server->polls_lock, NULL);
 
     /* Allocate poll pool */
     server->polls = calloc(POLLING_MAX_POLLS, sizeof(poll_t));
@@ -288,7 +288,7 @@ void polling_server_destroy(polling_server_t* server) {
     }
 
     pthread_mutex_destroy(&server->clients_lock);
-    pthread_rwlock_destroy(&server->polls_lock);
+    pthread_mutex_destroy(&server->polls_lock);
 
     for (int i = 0; i < server->max_clients; i++) {
         if (server->clients[i].is_active) {

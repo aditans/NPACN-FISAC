@@ -18,6 +18,7 @@
 #include <openssl/sha.h>
 #include <openssl/bio.h>
 #include <openssl/buffer.h>
+#include <errno.h>
 #include "../include/polling.h"
 
 /* ============================================================================

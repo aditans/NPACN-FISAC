@@ -1,0 +1,17 @@
+
+> polling-frontend@0.1.0 dev
+> vite
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+Port 5173 is in use, trying another one...
+Port 5174 is in use, trying another one...
+Port 5175 is in use, trying another one...
+
+  VITE v5.4.21  ready in 269 ms
+
+  ➜  Local:   http://localho7:12:12 AM [vite] hmr update /src/App.jsx
+7:31:19 AM [vite] hmr update /src/components/Polls.jsx
+7:31:30 AM [vite] hmr update /src/components/Polls.jsx
+7:36:18 AM [vite] hmr update /src/components/ServerDashboard.jsx
+7:36:35 AM [vite] hmr update /src/components/ClientConsole.jsx
+7:36:46 AM [vite] hmr update /src/components/ClientConsole.jsx

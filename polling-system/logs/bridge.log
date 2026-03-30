@@ -1,0 +1,8 @@
+nohup: ignoring input
+[bridge] Starting Node bridge - will connect to 127.0.0.1:8443
+[bridge] WebSocket bridge listening on port 3001
+[bridge] HTTP API listening on port 3002
+[bridge] Frontend connected via WebSocket
+[bridge] Frontend connected via WebSocket
+[bridge] Frontend connected via WebSocket
+[bridge] Frontend connected via WebSocket

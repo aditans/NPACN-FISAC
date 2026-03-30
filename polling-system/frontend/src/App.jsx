@@ -1,0 +1,116 @@
+import React, { useEffect, useState, useRef } from 'react'
+import ServerDashboard from './components/ServerDashboard'
+import ClientPanel from './components/ClientPanel'
+import Polls from './components/Polls'
+import StatusBar from './components/StatusBar'
+
+export default function App() {
+  const [logs, setLogs] = useState([])
+  const [clients, setClients] = useState({})
+  const [status, setStatus] = useState({ running: true, port: 8080, uptimeStart: Date.now(), totalConnections: 0 })
+  const wsRef = useRef(null)
+
+  useEffect(() => {
+    const ws = new WebSocket('ws://localhost:3001')
+    wsRef.current = ws
+
+    ws.addEventListener('open', () => {
+      setLogs((l) => [...l, { type: 'INFO', message: 'Connected to bridge', timestamp: new Date().toISOString() }])
+    })
+
+    ws.addEventListener('message', (ev) => {
+      try {
+        const obj = JSON.parse(ev.data)
+        handleBridgeEvent(obj)
+      } catch (e) {
+        console.error('invalid', e)
+      }
+    })
+
+    ws.addEventListener('close', () => setStatus((s) => ({ ...s, running: false })))
+
+    return () => ws.close()
+  }, [])
+
+  function handleBridgeEvent(obj) {
+    setLogs((l) => {
+      const next = [...l, obj]
+      return next.slice(-500)
+    })
+
+    // Maintain a clients map with basic stats
+    setClients((prev) => {
+      const next = { ...prev }
+      if (obj.type === 'CLIENT_CONNECTED') {
+        next[obj.clientId] = next[obj.clientId] || { id: obj.clientId, msgs: 0, bytes: 0 }
+        next[obj.clientId].connectedAt = obj.timestamp
+        next[obj.clientId].status = 'connected'
+      } else if (obj.type === 'CLIENT_DISCONNECTED') {
+        if (next[obj.clientId]) {
+          next[obj.clientId].status = 'disconnected'
+          next[obj.clientId].disconnectedAt = obj.timestamp
+        }
+      } else if (obj.type === 'DATA_RECEIVED' && obj.clientId) {
+        next[obj.clientId] = next[obj.clientId] || { id: obj.clientId, msgs: 0, bytes: 0 }
+        next[obj.clientId].msgs = (next[obj.clientId].msgs || 0) + 1
+        next[obj.clientId].bytes = (next[obj.clientId].bytes || 0) + (obj.bytes || (obj.data ? obj.data.length : 0))
+      }
+      return next
+    })
+
+    if (obj.type === 'CLIENT_CONNECTED') {
+      setStatus((s) => ({ ...s, totalConnections: s.totalConnections + 1 }))
+    }
+  }
+
+  function sendToBridge(payload) {
+    if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) wsRef.current.send(JSON.stringify(payload))
+  }
+
+  // Support simple path-based frontend split without adding a router.
+  // - /client -> client-only UI
+  // - /server -> server-only UI
+  // - default -> both panes
+  const path = typeof window !== 'undefined' ? window.location.pathname : '/'
+
+  if (path.startsWith('/client')) {
+    return (
+      <div className="h-screen p-3">
+        <div className="mb-3 flex items-center justify-between">
+          <div className="text-lg font-semibold">Client Simulator</div>
+          <a className="text-sm text-gray-400" href="/server">Open Server Dashboard</a>
+        </div>
+        <Polls onSend={sendToBridge} logs={logs} />
+      </div>
+    )
+  }
+
+  if (path.startsWith('/server')) {
+    return (
+      <div className="h-screen p-3">
+        <div className="mb-3 flex items-center justify-between">
+          <div className="text-lg font-semibold">Server Dashboard</div>
+          <a className="text-sm text-gray-400" href="/client">Open Client Simulator</a>
+        </div>
+        <StatusBar status={status} />
+        <div className="mt-3">
+          <ServerDashboard logs={logs} clients={clients} onSend={sendToBridge} />
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="h-screen grid grid-rows-[auto_1fr] gap-2 p-3">
+      <StatusBar status={status} />
+      <div className="grid grid-cols-3 gap-3 h-full">
+        <div className="col-span-2">
+          <ServerDashboard logs={logs} clients={clients} onSend={sendToBridge} />
+        </div>
+        <div className="col-span-1">
+          <ClientPanel onSend={sendToBridge} clients={clients} logs={logs} />
+        </div>
+      </div>
+    </div>
+  )
+}

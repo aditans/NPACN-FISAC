@@ -16,6 +16,7 @@
 #include <string.h>
 #include <time.h>
 #include <syslog.h>
+#include <stdarg.h>
 #include <openssl/rand.h>
 #include <openssl/sha.h>
 #include "../include/polling.h"
@@ -39,40 +40,40 @@ void polling_log_init(const char* ident, int facility) {
 void polling_log_info(const char* format, ...) {
     va_list args;
     va_start(args, format);
-    vsyslog(LOG_INFO, format, args);
-    fprintf(stdout, "[INFO] ");
-    vfprintf(stdout, format, args);
-    fprintf(stdout, "\n");
+    char _buf[1024];
+    vsnprintf(_buf, sizeof(_buf), format, args);
+    syslog(LOG_INFO, "%s", _buf);
+    fprintf(stdout, "[INFO] %s\n", _buf);
     va_end(args);
 }
 
 void polling_log_error(const char* format, ...) {
     va_list args;
     va_start(args, format);
-    vsyslog(LOG_ERR, format, args);
-    fprintf(stderr, "[ERROR] ");
-    vfprintf(stderr, format, args);
-    fprintf(stderr, "\n");
+    char _buf[1024];
+    vsnprintf(_buf, sizeof(_buf), format, args);
+    syslog(LOG_ERR, "%s", _buf);
+    fprintf(stderr, "[ERROR] %s\n", _buf);
     va_end(args);
 }
 
 void polling_log_debug(const char* format, ...) {
     va_list args;
     va_start(args, format);
-    vsyslog(LOG_DEBUG, format, args);
-    fprintf(stdout, "[DEBUG] ");
-    vfprintf(stdout, format, args);
-    fprintf(stdout, "\n");
+    char _buf[1024];
+    vsnprintf(_buf, sizeof(_buf), format, args);
+    syslog(LOG_DEBUG, "%s", _buf);
+    fprintf(stdout, "[DEBUG] %s\n", _buf);
     va_end(args);
 }
 
 void polling_log_warning(const char* format, ...) {
     va_list args;
     va_start(args, format);
-    vsyslog(LOG_WARNING, format, args);
-    fprintf(stdout, "[WARN] ");
-    vfprintf(stdout, format, args);
-    fprintf(stdout, "\n");
+    char _buf[1024];
+    vsnprintf(_buf, sizeof(_buf), format, args);
+    syslog(LOG_WARNING, "%s", _buf);
+    fprintf(stdout, "[WARN] %s\n", _buf);
     va_end(args);
 }
 

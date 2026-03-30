@@ -235,7 +235,7 @@ void polling_tls_close(void* tls_ctx) {
  */
 void polling_broadcast_poll_update(polling_server_t* server, poll_t* poll) {
     /* Lock poll data */
-    pthread_rwlock_rdlock(&poll->lock);
+    pthread_mutex_lock(&poll->lock);
 
     char update_msg[POLLING_BUFFER_SIZE];
     snprintf(update_msg, sizeof(update_msg),
@@ -249,7 +249,7 @@ void polling_broadcast_poll_update(polling_server_t* server, poll_t* poll) {
      *   - Handle EAGAIN (buffer full)
      */
 
-    pthread_rwlock_unlock(&poll->lock);
+    pthread_mutex_unlock(&poll->lock);
 }
 
 /**
@@ -260,17 +260,17 @@ int polling_get_poll(polling_server_t* server, uint32_t poll_id, poll_t** poll) 
         return -1;
     }
 
-    pthread_rwlock_rdlock(&server->polls_lock);
+    pthread_mutex_lock(&server->polls_lock);
 
     for (uint32_t i = 0; i < server->poll_count; i++) {
         if (server->polls[i].poll_id == poll_id) {
             *poll = &server->polls[i];
-            pthread_rwlock_unlock(&server->polls_lock);
+            pthread_mutex_unlock(&server->polls_lock);
             return 0;
         }
     }
 
-    pthread_rwlock_unlock(&server->polls_lock);
+    pthread_mutex_unlock(&server->polls_lock);
     return -1;  /* Not found */
 }
 
@@ -290,7 +290,7 @@ poll_t* polling_create_poll(uint32_t poll_id, const char* title, time_t duration
     p->total_votes = 0;
     p->option_count = 0;
 
-    pthread_rwlock_init(&p->lock, NULL);
+    pthread_mutex_init(&p->lock, NULL);
 
     return p;
 }

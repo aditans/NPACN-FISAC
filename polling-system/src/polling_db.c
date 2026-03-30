@@ -10,6 +10,9 @@
  * - Persistence calls below are in-memory only.
  * - Cosmos endpoint/key connectivity prechecks are validated before server start.
  */
+#ifndef _POSIX_C_SOURCE
+#define _POSIX_C_SOURCE 200112L
+#endif
 
 #include <stdio.h>
 #include <stdlib.h>

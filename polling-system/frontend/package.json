@@ -1,0 +1,21 @@
+{
+  "name": "polling-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "bridge": "node server.js",
+    "start": "concurrently \"npm run bridge\" \"npm run dev\""
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "ws": "^8.13.0",
+    "sqlite3": "^5.1.6",
+    "concurrently": "^8.0.1"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "@vitejs/plugin-react": "^4.0.0"
+  }
+}

@@ -1,9 +1,18 @@
 #ifndef __POLLING_H__
 #define __POLLING_H__
 
+#ifndef _POSIX_C_SOURCE
+#define _POSIX_C_SOURCE 200112L
+#endif
+
 #include <stdint.h>
 #include <time.h>
 #include <stddef.h>
+#include <sys/types.h>
+#include <sys/time.h>
+#include <pthread.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 /* ============================================================================
  * POLLING SYSTEM - CORE DEFINITIONS
@@ -105,7 +114,7 @@ typedef struct {
     uint32_t total_votes;
     poll_option_t options[POLLING_MAX_POLL_OPTIONS];
     uint32_t option_count;
-    pthread_rwlock_t lock;
+    pthread_mutex_t lock;
 } poll_t;
 
 /* User Session */
@@ -152,8 +161,8 @@ typedef struct {
     pthread_mutex_t clients_lock;
     poll_t* polls;
     uint32_t poll_count;
-    pthread_rwlock_t polls_lock;
-    int db_fd;  /* Database backend readiness marker */
+    pthread_mutex_t polls_lock;
+    int db_fd;  /* SQLite database file descriptor */
     char db_path[256];
     int log_facility;  /* Syslog facility */
 } polling_server_t;

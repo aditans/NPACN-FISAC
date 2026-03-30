@@ -24,6 +24,9 @@
  *  ...
  *  Summary: 47 passed, 3 failed, 0 skipped
  */
+#ifndef _POSIX_C_SOURCE
+#define _POSIX_C_SOURCE 200112L
+#endif
 
 #include <stdio.h>
 #include <stdlib.h>
