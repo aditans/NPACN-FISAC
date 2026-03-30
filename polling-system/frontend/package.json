@@ -12,6 +12,7 @@
     "react-dom": "^18.2.0",
     "ws": "^8.13.0",
     "sqlite3": "^5.1.6",
+  "@azure/cosmos": "^3.18.0",
     "concurrently": "^8.0.1"
   },
   "devDependencies": {

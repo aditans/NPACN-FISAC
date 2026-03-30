@@ -1,72 +1,956 @@
-nohup: ignoring input
 [INFO] Polling Server starting (version 1.0)
-[INFO] Server created: port=8443, max_clients=1024
-[INFO] Running Cosmos prechecks for polling backend...
-[INFO] Cosmos precheck passed: DNS + TCP/443 reachable
-[INFO] Polling DB backend initialized with Cosmos prechecks (db_id=npacn)
-[DEBUG] Socket created: fd=4
-[DEBUG] SO_REUSEADDR enabled on socket 4
-[DEBUG] SO_KEEPALIVE configured on socket 4 (idle=60, intvl=10, cnt=5)
-[DEBUG] Socket buffers configured: RCV=65536, SND=65536
-[INFO] Socket bound to [::]:/8443
-[INFO] Server listening on port 8443
-[INFO] Entering main accept loop
-[INFO] Accepted connection from ::ffff:127.0.0.1:46346 (fd=5)
+[INFO] DB path overridden from env: /tmp/polling/votes.db
+[INFO] Server created: port=8080, max_clients=1024
+[WARN] COSMOS env missing or incomplete; falling back to local SQLite backend
+[INFO] Polling DB backend initialized using SQLite (/tmp/polling/votes.db)
+[DEBUG] Socket created: fd=5
+[DEBUG] SO_REUSEADDR enabled on socket 5
 [DEBUG] SO_KEEPALIVE configured on socket 5 (idle=60, intvl=10, cnt=5)
-[DEBUG] TCP_NODELAY enabled on socket 5
 [DEBUG] Socket buffers configured: RCV=65536, SND=65536
-[INFO] Client handler started for ::ffff:127.0.0.1:46346 (fd=5)
-[INFO] Client ::ffff:127.0.0.1:46346 sent FIN (graceful close)
-[INFO] Closing client ::ffff:127.0.0.1:46346
-[INFO] Disconnecting client ::ffff:127.0.0.1:46346 - Sent: 0 bytes, Received: 1577 bytes
-[INFO] Client ::ffff:127.0.0.1:46346 fully closed
-[INFO] Accepted connection from ::ffff:127.0.0.1:39110 (fd=6)
+[INFO] Socket bound to [::]:/8080
+[INFO] Server listening on port 8080
+[INFO] Entering main accept loop
+[INFO] Accepted connection from ::ffff:127.0.0.1:46480 (fd=6)
 [DEBUG] SO_KEEPALIVE configured on socket 6 (idle=60, intvl=10, cnt=5)
 [DEBUG] TCP_NODELAY enabled on socket 6
 [DEBUG] Socket buffers configured: RCV=65536, SND=65536
-[INFO] Client handler started for ::ffff:127.0.0.1:39110 (fd=6)
-[INFO] Accepted connection from ::ffff:127.0.0.1:34436 (fd=5)
-[DEBUG] SO_KEEPALIVE configured on socket 5 (idle=60, intvl=10, cnt=5)
-[DEBUG] TCP_NODELAY enabled on socket 5
-[DEBUG] Socket buffers configured: RCV=65536, SND=65536
-[INFO] Client handler started for ::ffff:127.0.0.1:34436 (fd=5)
-[INFO] Accepted connection from ::ffff:127.0.0.1:55578 (fd=7)
+[INFO] Client handler started for ::ffff:127.0.0.1:46480 (fd=6)
+[INFO] Accepted connection from ::ffff:127.0.0.1:59588 (fd=7)
 [DEBUG] SO_KEEPALIVE configured on socket 7 (idle=60, intvl=10, cnt=5)
 [DEBUG] TCP_NODELAY enabled on socket 7
 [DEBUG] Socket buffers configured: RCV=65536, SND=65536
-[INFO] Client handler started for ::ffff:127.0.0.1:55578 (fd=7)
-[INFO] Accepted connection from ::ffff:127.0.0.1:41896 (fd=8)
+[INFO] Client handler started for ::ffff:127.0.0.1:59588 (fd=7)
+[INFO] Accepted connection from ::ffff:127.0.0.1:59602 (fd=8)
 [DEBUG] SO_KEEPALIVE configured on socket 8 (idle=60, intvl=10, cnt=5)
 [DEBUG] TCP_NODELAY enabled on socket 8
 [DEBUG] Socket buffers configured: RCV=65536, SND=65536
-[INFO] Client handler started for ::ffff:127.0.0.1:41896 (fd=8)
-[INFO] Client ::ffff:127.0.0.1:39110 sent FIN (graceful close)
-[INFO] Closing client ::ffff:127.0.0.1:39110
-[INFO] Disconnecting client ::ffff:127.0.0.1:39110 - Sent: 0 bytes, Received: 1577 bytes
-[INFO] Client ::ffff:127.0.0.1:39110 fully closed
-[INFO] Client ::ffff:127.0.0.1:34436 sent FIN (graceful close)
-[INFO] Closing client ::ffff:127.0.0.1:34436
-[INFO] Disconnecting client ::ffff:127.0.0.1:34436 - Sent: 0 bytes, Received: 1577 bytes
-[INFO] Client ::ffff:127.0.0.1:34436 fully closed
-[INFO] Client ::ffff:127.0.0.1:55578 sent FIN (graceful close)
-[INFO] Closing client ::ffff:127.0.0.1:55578
-[INFO] Disconnecting client ::ffff:127.0.0.1:55578 - Sent: 0 bytes, Received: 1577 bytes
-[INFO] Client ::ffff:127.0.0.1:55578 fully closed
-[INFO] Client ::ffff:127.0.0.1:41896 sent FIN (graceful close)
-[INFO] Closing client ::ffff:127.0.0.1:41896
-[INFO] Disconnecting client ::ffff:127.0.0.1:41896 - Sent: 0 bytes, Received: 1577 bytes
-[INFO] Client ::ffff:127.0.0.1:41896 fully closed
-[INFO] Accepted connection from ::ffff:127.0.0.1:41520 (fd=9)
+[INFO] Client handler started for ::ffff:127.0.0.1:59602 (fd=8)
+[INFO] Accepted connection from ::ffff:127.0.0.1:59616 (fd=9)
 [DEBUG] SO_KEEPALIVE configured on socket 9 (idle=60, intvl=10, cnt=5)
 [DEBUG] TCP_NODELAY enabled on socket 9
 [DEBUG] Socket buffers configured: RCV=65536, SND=65536
-[INFO] Client handler started for ::ffff:127.0.0.1:41520 (fd=9)
-[INFO] Accepted connection from ::ffff:127.0.0.1:52800 (fd=5)
-[DEBUG] SO_KEEPALIVE configured on socket 5 (idle=60, intvl=10, cnt=5)
-[DEBUG] TCP_NODELAY enabled on socket 5
+[INFO] Client handler started for ::ffff:127.0.0.1:59616 (fd=9)
+[INFO] Accepted connection from ::ffff:127.0.0.1:59620 (fd=10)
+[DEBUG] SO_KEEPALIVE configured on socket 10 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 10
 [DEBUG] Socket buffers configured: RCV=65536, SND=65536
-[INFO] Client handler started for ::ffff:127.0.0.1:52800 (fd=5)
-[INFO] Client ::ffff:127.0.0.1:41520 sent FIN (graceful close)
-[INFO] Closing client ::ffff:127.0.0.1:41520
-[INFO] Disconnecting client ::ffff:127.0.0.1:41520 - Sent: 0 bytes, Received: 1577 bytes
-[INFO] Client ::ffff:127.0.0.1:4
+[INFO] Client handler started for ::ffff:127.0.0.1:59620 (fd=10)
+[INFO] Accepted connection from ::ffff:127.0.0.1:59632 (fd=11)
+[DEBUG] SO_KEEPALIVE configured on socket 11 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 11
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:59632 (fd=11)
+[INFO] Accepted connection from ::ffff:127.0.0.1:55100 (fd=12)
+[DEBUG] SO_KEEPALIVE configured on socket 12 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 12
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:55100 (fd=12)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41260 (fd=13)
+[DEBUG] SO_KEEPALIVE configured on socket 13 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 13
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41260 (fd=13)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41262 (fd=14)
+[DEBUG] SO_KEEPALIVE configured on socket 14 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 14
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41262 (fd=14)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41268 (fd=15)
+[DEBUG] SO_KEEPALIVE configured on socket 15 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 15
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41268 (fd=15)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41280 (fd=16)
+[DEBUG] SO_KEEPALIVE configured on socket 16 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 16
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41280 (fd=16)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41294 (fd=17)
+[DEBUG] SO_KEEPALIVE configured on socket 17 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 17
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41294 (fd=17)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41300 (fd=18)
+[DEBUG] SO_KEEPALIVE configured on socket 18 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 18
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41300 (fd=18)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41316 (fd=19)
+[DEBUG] SO_KEEPALIVE configured on socket 19 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 19
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41316 (fd=19)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41330 (fd=20)
+[DEBUG] SO_KEEPALIVE configured on socket 20 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 20
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41330 (fd=20)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41340 (fd=21)
+[DEBUG] SO_KEEPALIVE configured on socket 21 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 21
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41340 (fd=21)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41344 (fd=22)
+[DEBUG] SO_KEEPALIVE configured on socket 22 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 22
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41344 (fd=22)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41346 (fd=23)
+[DEBUG] SO_KEEPALIVE configured on socket 23 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 23
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41346 (fd=23)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41360 (fd=24)
+[DEBUG] SO_KEEPALIVE configured on socket 24 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 24
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41360 (fd=24)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41376 (fd=25)
+[DEBUG] SO_KEEPALIVE configured on socket 25 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 25
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41376 (fd=25)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41380 (fd=26)
+[DEBUG] SO_KEEPALIVE configured on socket 26 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 26
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41380 (fd=26)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41396 (fd=27)
+[DEBUG] SO_KEEPALIVE configured on socket 27 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 27
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41396 (fd=27)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41410 (fd=28)
+[DEBUG] SO_KEEPALIVE configured on socket 28 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 28
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41410 (fd=28)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41416 (fd=29)
+[DEBUG] SO_KEEPALIVE configured on socket 29 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 29
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41416 (fd=29)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41424 (fd=30)
+[DEBUG] SO_KEEPALIVE configured on socket 30 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 30
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41424 (fd=30)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41428 (fd=31)
+[DEBUG] SO_KEEPALIVE configured on socket 31 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 31
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41428 (fd=31)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41434 (fd=32)
+[DEBUG] SO_KEEPALIVE configured on socket 32 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 32
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41434 (fd=32)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41442 (fd=33)
+[DEBUG] SO_KEEPALIVE configured on socket 33 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 33
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41442 (fd=33)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41446 (fd=34)
+[DEBUG] SO_KEEPALIVE configured on socket 34 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 34
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41446 (fd=34)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41450 (fd=37)
+[DEBUG] SO_KEEPALIVE configured on socket 37 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 37
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41450 (fd=37)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41460 (fd=38)
+[DEBUG] SO_KEEPALIVE configured on socket 38 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 38
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41460 (fd=38)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41474 (fd=39)
+[DEBUG] SO_KEEPALIVE configured on socket 39 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 39
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41474 (fd=39)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41490 (fd=40)
+[DEBUG] SO_KEEPALIVE configured on socket 40 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 40
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41490 (fd=40)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41492 (fd=41)
+[DEBUG] SO_KEEPALIVE configured on socket 41 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 41
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41492 (fd=41)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41496 (fd=42)
+[DEBUG] SO_KEEPALIVE configured on socket 42 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 42
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41496 (fd=42)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41506 (fd=49)
+[DEBUG] SO_KEEPALIVE configured on socket 49 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 49
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41506 (fd=49)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41508 (fd=50)
+[DEBUG] SO_KEEPALIVE configured on socket 50 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 50
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41508 (fd=50)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41522 (fd=51)
+[DEBUG] SO_KEEPALIVE configured on socket 51 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 51
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41522 (fd=51)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41528 (fd=52)
+[DEBUG] SO_KEEPALIVE configured on socket 52 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 52
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41528 (fd=52)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41540 (fd=53)
+[DEBUG] SO_KEEPALIVE configured on socket 53 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 53
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41540 (fd=53)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41546 (fd=54)
+[DEBUG] SO_KEEPALIVE configured on socket 54 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 54
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41546 (fd=54)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41552 (fd=55)
+[DEBUG] SO_KEEPALIVE configured on socket 55 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 55
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41552 (fd=55)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41554 (fd=56)
+[DEBUG] SO_KEEPALIVE configured on socket 56 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 56
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41554 (fd=56)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41564 (fd=57)
+[DEBUG] SO_KEEPALIVE configured on socket 57 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 57
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41564 (fd=57)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41570 (fd=58)
+[DEBUG] SO_KEEPALIVE configured on socket 58 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 58
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41570 (fd=58)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41572 (fd=59)
+[DEBUG] SO_KEEPALIVE configured on socket 59 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 59
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41572 (fd=59)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41580 (fd=60)
+[DEBUG] SO_KEEPALIVE configured on socket 60 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 60
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41580 (fd=60)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41592 (fd=61)
+[DEBUG] SO_KEEPALIVE configured on socket 61 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 61
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41592 (fd=61)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41606 (fd=62)
+[DEBUG] SO_KEEPALIVE configured on socket 62 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 62
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41606 (fd=62)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41614 (fd=63)
+[DEBUG] SO_KEEPALIVE configured on socket 63 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 63
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41614 (fd=63)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41626 (fd=64)
+[DEBUG] SO_KEEPALIVE configured on socket 64 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 64
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41626 (fd=64)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41638 (fd=65)
+[DEBUG] SO_KEEPALIVE configured on socket 65 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 65
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41638 (fd=65)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41650 (fd=66)
+[DEBUG] SO_KEEPALIVE configured on socket 66 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 66
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41650 (fd=66)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41662 (fd=67)
+[DEBUG] SO_KEEPALIVE configured on socket 67 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 67
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41662 (fd=67)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41676 (fd=68)
+[DEBUG] SO_KEEPALIVE configured on socket 68 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 68
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41676 (fd=68)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41678 (fd=69)
+[DEBUG] SO_KEEPALIVE configured on socket 69 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 69
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41678 (fd=69)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41680 (fd=70)
+[DEBUG] SO_KEEPALIVE configured on socket 70 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 70
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41680 (fd=70)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41694 (fd=71)
+[DEBUG] SO_KEEPALIVE configured on socket 71 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 71
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41694 (fd=71)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41702 (fd=72)
+[DEBUG] SO_KEEPALIVE configured on socket 72 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 72
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41702 (fd=72)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41706 (fd=73)
+[DEBUG] SO_KEEPALIVE configured on socket 73 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 73
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41706 (fd=73)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41708 (fd=74)
+[DEBUG] SO_KEEPALIVE configured on socket 74 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 74
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41708 (fd=74)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41718 (fd=75)
+[DEBUG] SO_KEEPALIVE configured on socket 75 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 75
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41718 (fd=75)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41728 (fd=76)
+[DEBUG] SO_KEEPALIVE configured on socket 76 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 76
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41728 (fd=76)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41736 (fd=77)
+[DEBUG] SO_KEEPALIVE configured on socket 77 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 77
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41736 (fd=77)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41738 (fd=78)
+[DEBUG] SO_KEEPALIVE configured on socket 78 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 78
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41738 (fd=78)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41744 (fd=79)
+[DEBUG] SO_KEEPALIVE configured on socket 79 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 79
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41744 (fd=79)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41754 (fd=80)
+[DEBUG] SO_KEEPALIVE configured on socket 80 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 80
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41754 (fd=80)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41766 (fd=81)
+[DEBUG] SO_KEEPALIVE configured on socket 81 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 81
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41766 (fd=81)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41770 (fd=82)
+[DEBUG] SO_KEEPALIVE configured on socket 82 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 82
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41770 (fd=82)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50042 (fd=83)
+[DEBUG] SO_KEEPALIVE configured on socket 83 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 83
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50042 (fd=83)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50048 (fd=84)
+[DEBUG] SO_KEEPALIVE configured on socket 84 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 84
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50048 (fd=84)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50056 (fd=85)
+[DEBUG] SO_KEEPALIVE configured on socket 85 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 85
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50056 (fd=85)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50058 (fd=86)
+[DEBUG] SO_KEEPALIVE configured on socket 86 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 86
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50058 (fd=86)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50060 (fd=87)
+[DEBUG] SO_KEEPALIVE configured on socket 87 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 87
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50060 (fd=87)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50072 (fd=88)
+[DEBUG] SO_KEEPALIVE configured on socket 88 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 88
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50072 (fd=88)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50084 (fd=89)
+[DEBUG] SO_KEEPALIVE configured on socket 89 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 89
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50084 (fd=89)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50100 (fd=90)
+[DEBUG] SO_KEEPALIVE configured on socket 90 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 90
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50100 (fd=90)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50108 (fd=91)
+[DEBUG] SO_KEEPALIVE configured on socket 91 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 91
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50108 (fd=91)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50122 (fd=92)
+[DEBUG] SO_KEEPALIVE configured on socket 92 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 92
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50122 (fd=92)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50124 (fd=93)
+[DEBUG] SO_KEEPALIVE configured on socket 93 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 93
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50124 (fd=93)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50134 (fd=94)
+[DEBUG] SO_KEEPALIVE configured on socket 94 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 94
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50134 (fd=94)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50142 (fd=95)
+[DEBUG] SO_KEEPALIVE configured on socket 95 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 95
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50142 (fd=95)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50144 (fd=96)
+[DEBUG] SO_KEEPALIVE configured on socket 96 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 96
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50144 (fd=96)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50154 (fd=97)
+[DEBUG] SO_KEEPALIVE configured on socket 97 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 97
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50154 (fd=97)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50160 (fd=98)
+[DEBUG] SO_KEEPALIVE configured on socket 98 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 98
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50160 (fd=98)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50164 (fd=99)
+[DEBUG] SO_KEEPALIVE configured on socket 99 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 99
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50164 (fd=99)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50180 (fd=100)
+[DEBUG] SO_KEEPALIVE configured on socket 100 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 100
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50180 (fd=100)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50182 (fd=101)
+[DEBUG] SO_KEEPALIVE configured on socket 101 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 101
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50182 (fd=101)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50192 (fd=102)
+[DEBUG] SO_KEEPALIVE configured on socket 102 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 102
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50192 (fd=102)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50206 (fd=104)
+[DEBUG] SO_KEEPALIVE configured on socket 104 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 104
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50206 (fd=104)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50212 (fd=105)
+[DEBUG] SO_KEEPALIVE configured on socket 105 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 105
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50212 (fd=105)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50222 (fd=106)
+[DEBUG] SO_KEEPALIVE configured on socket 106 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 106
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50222 (fd=106)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50236 (fd=107)
+[DEBUG] SO_KEEPALIVE configured on socket 107 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 107
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50236 (fd=107)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50250 (fd=108)
+[DEBUG] SO_KEEPALIVE configured on socket 108 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 108
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50250 (fd=108)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50258 (fd=109)
+[DEBUG] SO_KEEPALIVE configured on socket 109 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 109
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50258 (fd=109)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50268 (fd=110)
+[DEBUG] SO_KEEPALIVE configured on socket 110 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 110
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50268 (fd=110)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50274 (fd=111)
+[DEBUG] SO_KEEPALIVE configured on socket 111 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 111
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50274 (fd=111)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50288 (fd=112)
+[DEBUG] SO_KEEPALIVE configured on socket 112 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 112
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50288 (fd=112)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50292 (fd=113)
+[DEBUG] SO_KEEPALIVE configured on socket 113 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 113
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50292 (fd=113)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50306 (fd=114)
+[DEBUG] SO_KEEPALIVE configured on socket 114 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 114
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50306 (fd=114)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50318 (fd=115)
+[DEBUG] SO_KEEPALIVE configured on socket 115 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 115
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50318 (fd=115)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50320 (fd=116)
+[DEBUG] SO_KEEPALIVE configured on socket 116 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 116
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50320 (fd=116)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50328 (fd=117)
+[DEBUG] SO_KEEPALIVE configured on socket 117 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 117
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50328 (fd=117)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50330 (fd=118)
+[DEBUG] SO_KEEPALIVE configured on socket 118 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 118
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50330 (fd=118)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50336 (fd=119)
+[DEBUG] SO_KEEPALIVE configured on socket 119 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 119
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50336 (fd=119)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50346 (fd=120)
+[DEBUG] SO_KEEPALIVE configured on socket 120 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 120
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50346 (fd=120)
+[INFO] Accepted connection from ::ffff:127.0.0.1:50354 (fd=121)
+[DEBUG] SO_KEEPALIVE configured on socket 121 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 121
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:50354 (fd=121)
+[INFO] Client ::ffff:127.0.0.1:46480 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:46480
+[INFO] Disconnecting client ::ffff:127.0.0.1:46480 - Sent: 0 bytes, Received: 4 bytes
+[INFO] Client ::ffff:127.0.0.1:46480 fully closed
+[INFO] Client ::ffff:127.0.0.1:59588 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:59588
+[INFO] Disconnecting client ::ffff:127.0.0.1:59588 - Sent: 0 bytes, Received: 4 bytes
+[INFO] Client ::ffff:127.0.0.1:59588 fully closed
+[INFO] Client ::ffff:127.0.0.1:59616 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:59616
+[INFO] Disconnecting client ::ffff:127.0.0.1:59616 - Sent: 0 bytes, Received: 4 bytes
+[INFO] Client ::ffff:127.0.0.1:59616 fully closed
+[INFO] Client ::ffff:127.0.0.1:59602 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:59602
+[INFO] Disconnecting client ::ffff:127.0.0.1:59602 - Sent: 0 bytes, Received: 4 bytes
+[INFO] Client ::ffff:127.0.0.1:59602 fully closed
+[INFO] Client ::ffff:127.0.0.1:59620 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:59620
+[INFO] Disconnecting client ::ffff:127.0.0.1:59620 - Sent: 0 bytes, Received: 4 bytes
+[INFO] Client ::ffff:127.0.0.1:59620 fully closed
+[INFO] Client ::ffff:127.0.0.1:55100 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:55100
+[INFO] Disconnecting client ::ffff:127.0.0.1:55100 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:55100 fully closed
+[INFO] Client ::ffff:127.0.0.1:59632 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:59632
+[INFO] Disconnecting client ::ffff:127.0.0.1:59632 - Sent: 0 bytes, Received: 4 bytes
+[INFO] Client ::ffff:127.0.0.1:59632 fully closed
+[INFO] Client ::ffff:127.0.0.1:41260 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41260
+[INFO] Disconnecting client ::ffff:127.0.0.1:41260 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41260 fully closed
+[INFO] Client ::ffff:127.0.0.1:41268 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41268
+[INFO] Disconnecting client ::ffff:127.0.0.1:41268 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41268 fully closed
+[INFO] Client ::ffff:127.0.0.1:41280 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41280
+[INFO] Disconnecting client ::ffff:127.0.0.1:41280 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41280 fully closed
+[INFO] Client ::ffff:127.0.0.1:41294 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41294
+[INFO] Disconnecting client ::ffff:127.0.0.1:41294 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41294 fully closed
+[INFO] Client ::ffff:127.0.0.1:41300 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41300
+[INFO] Disconnecting client ::ffff:127.0.0.1:41300 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41300 fully closed
+[INFO] Client ::ffff:127.0.0.1:41262 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41262
+[INFO] Disconnecting client ::ffff:127.0.0.1:41262 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41262 fully closed
+[INFO] Client ::ffff:127.0.0.1:41330 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41330
+[INFO] Disconnecting client ::ffff:127.0.0.1:41330 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41330 fully closed
+[INFO] Client ::ffff:127.0.0.1:41316 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41316
+[INFO] Disconnecting client ::ffff:127.0.0.1:41316 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41316 fully closed
+[INFO] Client ::ffff:127.0.0.1:41344 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41344
+[INFO] Disconnecting client ::ffff:127.0.0.1:41344 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41344 fully closed
+[INFO] Client ::ffff:127.0.0.1:41346 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41346
+[INFO] Disconnecting client ::ffff:127.0.0.1:41346 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41346 fully closed
+[INFO] Client ::ffff:127.0.0.1:41340 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41340
+[INFO] Disconnecting client ::ffff:127.0.0.1:41340 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41340 fully closed
+[INFO] Client ::ffff:127.0.0.1:41360 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41360
+[INFO] Disconnecting client ::ffff:127.0.0.1:41360 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41360 fully closed
+[INFO] Client ::ffff:127.0.0.1:41376 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41376
+[INFO] Client ::ffff:127.0.0.1:41380 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41380
+[INFO] Disconnecting client ::ffff:127.0.0.1:41380 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41380 fully closed
+[INFO] Disconnecting client ::ffff:127.0.0.1:41376 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41376 fully closed
+[INFO] Client ::ffff:127.0.0.1:41396 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41396
+[INFO] Disconnecting client ::ffff:127.0.0.1:41396 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41396 fully closed
+[INFO] Client ::ffff:127.0.0.1:41410 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41410
+[INFO] Disconnecting client ::ffff:127.0.0.1:41410 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41410 fully closed
+[INFO] Client ::ffff:127.0.0.1:41424 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41424
+[INFO] Disconnecting client ::ffff:127.0.0.1:41424 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41424 fully closed
+[INFO] Client ::ffff:127.0.0.1:41416 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41416
+[INFO] Disconnecting client ::ffff:127.0.0.1:41416 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41416 fully closed
+[INFO] Client ::ffff:127.0.0.1:41434 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41434
+[INFO] Disconnecting client ::ffff:127.0.0.1:41434 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41434 fully closed
+[INFO] Client ::ffff:127.0.0.1:41446 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41446
+[INFO] Disconnecting client ::ffff:127.0.0.1:41446 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41446 fully closed
+[INFO] Client ::ffff:127.0.0.1:41450 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41450
+[INFO] Disconnecting client ::ffff:127.0.0.1:41450 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41450 fully closed
+[INFO] Client ::ffff:127.0.0.1:41428 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41428
+[INFO] Disconnecting client ::ffff:127.0.0.1:41428 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41428 fully closed
+[INFO] Client ::ffff:127.0.0.1:41442 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41442
+[INFO] Disconnecting client ::ffff:127.0.0.1:41442 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41442 fully closed
+[INFO] Client ::ffff:127.0.0.1:41460 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41460
+[INFO] Disconnecting client ::ffff:127.0.0.1:41460 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41460 fully closed
+[INFO] Client ::ffff:127.0.0.1:41490 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41490
+[INFO] Disconnecting client ::ffff:127.0.0.1:41490 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41490 fully closed
+[INFO] Client ::ffff:127.0.0.1:41492 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41492
+[INFO] Disconnecting client ::ffff:127.0.0.1:41492 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41492 fully closed
+[INFO] Client ::ffff:127.0.0.1:41474 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41474
+[INFO] Disconnecting client ::ffff:127.0.0.1:41474 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41474 fully closed
+[INFO] Client ::ffff:127.0.0.1:41496 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41496
+[INFO] Disconnecting client ::ffff:127.0.0.1:41496 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41496 fully closed
+[INFO] Client ::ffff:127.0.0.1:41508 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41508
+[INFO] Disconnecting client ::ffff:127.0.0.1:41508 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41508 fully closed
+[INFO] Client ::ffff:127.0.0.1:41506 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41506
+[INFO] Disconnecting client ::ffff:127.0.0.1:41506 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41506 fully closed
+[INFO] Client ::ffff:127.0.0.1:41522 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41522
+[INFO] Disconnecting client ::ffff:127.0.0.1:41522 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41522 fully closed
+[INFO] Client ::ffff:127.0.0.1:41540 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41540
+[INFO] Disconnecting client ::ffff:127.0.0.1:41540 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41540 fully closed
+[INFO] Client ::ffff:127.0.0.1:41528 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41528
+[INFO] Disconnecting client ::ffff:127.0.0.1:41528 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41528 fully closed
+[INFO] Client ::ffff:127.0.0.1:41546 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41546
+[INFO] Disconnecting client ::ffff:127.0.0.1:41546 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41546 fully closed
+[INFO] Client ::ffff:127.0.0.1:41552 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41552
+[INFO] Disconnecting client ::ffff:127.0.0.1:41552 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41552 fully closed
+[INFO] Client ::ffff:127.0.0.1:41554 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41554
+[INFO] Disconnecting client ::ffff:127.0.0.1:41554 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41554 fully closed
+[INFO] Client ::ffff:127.0.0.1:41564 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41564
+[INFO] Disconnecting client ::ffff:127.0.0.1:41564 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41564 fully closed
+[INFO] Client ::ffff:127.0.0.1:41570 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41570
+[INFO] Disconnecting client ::ffff:127.0.0.1:41570 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41570 fully closed
+[INFO] Client ::ffff:127.0.0.1:41572 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41572
+[INFO] Disconnecting client ::ffff:127.0.0.1:41572 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41572 fully closed
+[INFO] Client ::ffff:127.0.0.1:41580 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41580
+[INFO] Disconnecting client ::ffff:127.0.0.1:41580 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41580 fully closed
+[INFO] Client ::ffff:127.0.0.1:41606 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41606
+[INFO] Disconnecting client ::ffff:127.0.0.1:41606 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41606 fully closed
+[INFO] Client ::ffff:127.0.0.1:41592 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41592
+[INFO] Disconnecting client ::ffff:127.0.0.1:41592 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41592 fully closed
+[INFO] Client ::ffff:127.0.0.1:41614 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41614
+[INFO] Disconnecting client ::ffff:127.0.0.1:41614 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41614 fully closed
+[INFO] Client ::ffff:127.0.0.1:41626 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41626
+[INFO] Disconnecting client ::ffff:127.0.0.1:41626 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41626 fully closed
+[INFO] Client ::ffff:127.0.0.1:41650 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41650
+[INFO] Disconnecting client ::ffff:127.0.0.1:41650 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41650 fully closed
+[INFO] Client ::ffff:127.0.0.1:41638 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41638
+[INFO] Disconnecting client ::ffff:127.0.0.1:41638 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41638 fully closed
+[INFO] Client ::ffff:127.0.0.1:41662 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41662
+[INFO] Disconnecting client ::ffff:127.0.0.1:41662 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41662 fully closed
+[INFO] Client ::ffff:127.0.0.1:41676 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41676
+[INFO] Disconnecting client ::ffff:127.0.0.1:41676 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41676 fully closed
+[INFO] Client ::ffff:127.0.0.1:41678 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41678
+[INFO] Disconnecting client ::ffff:127.0.0.1:41678 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41678 fully closed
+[INFO] Client ::ffff:127.0.0.1:41680 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41680
+[INFO] Disconnecting client ::ffff:127.0.0.1:41680 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41680 fully closed
+[INFO] Client ::ffff:127.0.0.1:41694 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41694
+[INFO] Disconnecting client ::ffff:127.0.0.1:41694 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41694 fully closed
+[INFO] Client ::ffff:127.0.0.1:41702 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41702
+[INFO] Disconnecting client ::ffff:127.0.0.1:41702 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41702 fully closed
+[INFO] Client ::ffff:127.0.0.1:41706 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41706
+[INFO] Disconnecting client ::ffff:127.0.0.1:41706 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41706 fully closed
+[INFO] Client ::ffff:127.0.0.1:41708 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41708
+[INFO] Disconnecting client ::ffff:127.0.0.1:41708 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41708 fully closed
+[INFO] Client ::ffff:127.0.0.1:41718 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41718
+[INFO] Disconnecting client ::ffff:127.0.0.1:41718 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41718 fully closed
+[INFO] Client ::ffff:127.0.0.1:41736 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41736
+[INFO] Disconnecting client ::ffff:127.0.0.1:41736 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41736 fully closed
+[INFO] Client ::ffff:127.0.0.1:41728 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41728
+[INFO] Disconnecting client ::ffff:127.0.0.1:41728 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41728 fully closed
+[INFO] Client ::ffff:127.0.0.1:41738 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41738
+[INFO] Disconnecting client ::ffff:127.0.0.1:41738 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41738 fully closed
+[INFO] Client ::ffff:127.0.0.1:41754 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41754
+[INFO] Disconnecting client ::ffff:127.0.0.1:41754 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41754 fully closed
+[INFO] Client ::ffff:127.0.0.1:41744 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41744
+[INFO] Disconnecting client ::ffff:127.0.0.1:41744 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41744 fully closed
+[INFO] Client ::ffff:127.0.0.1:41770 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41770
+[INFO] Disconnecting client ::ffff:127.0.0.1:41770 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41770 fully closed
+[INFO] Client ::ffff:127.0.0.1:41766 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41766
+[INFO] Disconnecting client ::ffff:127.0.0.1:41766 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:41766 fully closed
+[INFO] Client ::ffff:127.0.0.1:50042 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50042
+[INFO] Disconnecting client ::ffff:127.0.0.1:50042 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50042 fully closed
+[INFO] Client ::ffff:127.0.0.1:50048 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50048
+[INFO] Disconnecting client ::ffff:127.0.0.1:50048 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50048 fully closed
+[INFO] Client ::ffff:127.0.0.1:50056 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50056
+[INFO] Disconnecting client ::ffff:127.0.0.1:50056 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50056 fully closed
+[INFO] Client ::ffff:127.0.0.1:50058 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50058
+[INFO] Disconnecting client ::ffff:127.0.0.1:50058 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50058 fully closed
+[INFO] Client ::ffff:127.0.0.1:50060 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50060
+[INFO] Disconnecting client ::ffff:127.0.0.1:50060 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50060 fully closed
+[INFO] Client ::ffff:127.0.0.1:50072 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50072
+[INFO] Disconnecting client ::ffff:127.0.0.1:50072 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50072 fully closed
+[INFO] Client ::ffff:127.0.0.1:50084 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50084
+[INFO] Disconnecting client ::ffff:127.0.0.1:50084 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50084 fully closed
+[INFO] Client ::ffff:127.0.0.1:50122 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50122
+[INFO] Disconnecting client ::ffff:127.0.0.1:50122 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50122 fully closed
+[INFO] Client ::ffff:127.0.0.1:50100 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50100
+[INFO] Disconnecting client ::ffff:127.0.0.1:50100 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50100 fully closed
+[INFO] Client ::ffff:127.0.0.1:50108 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50108
+[INFO] Disconnecting client ::ffff:127.0.0.1:50108 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50108 fully closed
+[INFO] Client ::ffff:127.0.0.1:50134 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50134
+[INFO] Disconnecting client ::ffff:127.0.0.1:50134 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50134 fully closed
+[INFO] Client ::ffff:127.0.0.1:50124 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50124
+[INFO] Disconnecting client ::ffff:127.0.0.1:50124 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50124 fully closed
+[INFO] Client ::ffff:127.0.0.1:50142 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50142
+[INFO] Disconnecting client ::ffff:127.0.0.1:50142 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50142 fully closed
+[INFO] Client ::ffff:127.0.0.1:50144 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50144
+[INFO] Disconnecting client ::ffff:127.0.0.1:50144 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50144 fully closed
+[INFO] Client ::ffff:127.0.0.1:50154 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50154
+[INFO] Disconnecting client ::ffff:127.0.0.1:50154 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50154 fully closed
+[INFO] Client ::ffff:127.0.0.1:50160 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50160
+[INFO] Disconnecting client ::ffff:127.0.0.1:50160 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50160 fully closed
+[INFO] Client ::ffff:127.0.0.1:50182 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50182
+[INFO] Disconnecting client ::ffff:127.0.0.1:50182 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50182 fully closed
+[INFO] Client ::ffff:127.0.0.1:50164 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50164
+[INFO] Disconnecting client ::ffff:127.0.0.1:50164 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50164 fully closed
+[INFO] Client ::ffff:127.0.0.1:50180 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50180
+[INFO] Disconnecting client ::ffff:127.0.0.1:50180 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50180 fully closed
+[INFO] Client ::ffff:127.0.0.1:50206 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50206
+[INFO] Disconnecting client ::ffff:127.0.0.1:50206 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50206 fully closed
+[INFO] Client ::ffff:127.0.0.1:50192 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50192
+[INFO] Disconnecting client ::ffff:127.0.0.1:50192 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50192 fully closed
+[INFO] Client ::ffff:127.0.0.1:50212 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50212
+[INFO] Disconnecting client ::ffff:127.0.0.1:50212 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50212 fully closed
+[INFO] Client ::ffff:127.0.0.1:50222 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50222
+[INFO] Disconnecting client ::ffff:127.0.0.1:50222 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50222 fully closed
+[INFO] Client ::ffff:127.0.0.1:50236 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50236
+[INFO] Disconnecting client ::ffff:127.0.0.1:50236 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50236 fully closed
+[INFO] Client ::ffff:127.0.0.1:50250 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50250
+[INFO] Disconnecting client ::ffff:127.0.0.1:50250 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50250 fully closed
+[INFO] Client ::ffff:127.0.0.1:50258 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50258
+[INFO] Disconnecting client ::ffff:127.0.0.1:50258 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50258 fully closed
+[INFO] Client ::ffff:127.0.0.1:50274 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50274
+[INFO] Disconnecting client ::ffff:127.0.0.1:50274 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50274 fully closed
+[INFO] Client ::ffff:127.0.0.1:50292 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50292
+[INFO] Disconnecting client ::ffff:127.0.0.1:50292 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50292 fully closed
+[INFO] Client ::ffff:127.0.0.1:50306 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50306
+[INFO] Disconnecting client ::ffff:127.0.0.1:50306 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50306 fully closed
+[INFO] Client ::ffff:127.0.0.1:50268 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50268
+[INFO] Disconnecting client ::ffff:127.0.0.1:50268 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50268 fully closed
+[INFO] Client ::ffff:127.0.0.1:50288 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50288
+[INFO] Disconnecting client ::ffff:127.0.0.1:50288 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50288 fully closed
+[INFO] Client ::ffff:127.0.0.1:50320 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50320
+[INFO] Disconnecting client ::ffff:127.0.0.1:50320 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50320 fully closed
+[INFO] Client ::ffff:127.0.0.1:50328 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:50328
+[INFO] Disconnecting client ::ffff:127.0.0.1:50328 - Sent: 0 bytes, Received: 0 bytes
+[INFO] Client ::ffff:127.0.0.1:50328 fully closed
+[

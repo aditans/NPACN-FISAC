@@ -21,7 +21,7 @@
 
 CC           = gcc
 CFLAGS       = -Wall -Wextra -std=c99 -Iinclude -g -O2
-LDFLAGS      = -lpthread -lssl -lcrypto -lm
+LDFLAGS      = -lpthread -lssl -lcrypto -lm -lsqlite3
 WARNINGS     = -Wpedantic -Wshadow -Wunreachable-code
 
 # Source files

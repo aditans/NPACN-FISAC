@@ -107,18 +107,23 @@ function broadcast(obj) {
   });
 }
 
-function createSimulatedClient(clientId) {
+function createSimulatedClient(clientId, options = {}) {
   if (simulatedClients[clientId]) return;
   let s;
   if (C_SERVER_TLS) {
     const opts = { host: TARGET_HOST, port: TARGET_PORT, rejectUnauthorized: !C_SERVER_TLS_INSECURE };
     s = tls.connect(opts, () => {
+      // apply socket options if provided
+      try { if (typeof s.setNoDelay === 'function' && options.noDelay !== undefined) s.setNoDelay(!!options.noDelay); } catch (e) {}
+      try { if (typeof s.setKeepAlive === 'function' && options.keepAlive !== undefined) s.setKeepAlive(!!options.keepAlive, options.keepAliveDelay || 0); } catch (e) {}
       broadcast({ type: 'CLIENT_CONNECTED', clientId, tls: true, timestamp: new Date().toISOString() });
       console.log('[bridge] simulated TLS client connected', clientId);
     });
   } else {
     s = new net.Socket();
     s.connect(TARGET_PORT, TARGET_HOST, () => {
+      try { if (typeof s.setNoDelay === 'function' && options.noDelay !== undefined) s.setNoDelay(!!options.noDelay); } catch (e) {}
+      try { if (typeof s.setKeepAlive === 'function' && options.keepAlive !== undefined) s.setKeepAlive(!!options.keepAlive, options.keepAliveDelay || 0); } catch (e) {}
       broadcast({ type: 'CLIENT_CONNECTED', clientId, timestamp: new Date().toISOString() });
       console.log('[bridge] simulated client connected', clientId);
     });
@@ -187,8 +192,9 @@ const apiServer = http.createServer((req, res) => {
       try {
         const data = buf ? JSON.parse(buf) : {};
         const clientId = data.clientId || `client-${Date.now()}`;
-        createSimulatedClient(clientId);
-        sendJson(res, 201, { ok: true, clientId });
+        const socketOptions = data.socketOptions || data.options || {};
+        createSimulatedClient(clientId, socketOptions);
+        sendJson(res, 201, { ok: true, clientId, socketOptions });
       } catch (e) {
         sendJson(res, 400, { ok: false, error: 'invalid json' });
       }
@@ -323,6 +329,31 @@ const apiServer = http.createServer((req, res) => {
     return;
   }
 
+  // POST /client/:id/disconnect?abrupt=1 -> disconnect a simulated client (abrupt or graceful)
+  if (req.method === 'POST' && url.pathname.startsWith('/client/') && url.pathname.endsWith('/disconnect')) {
+    const parts = url.pathname.split('/');
+    const clientId = parts[2];
+    const abrupt = url.searchParams.get('abrupt');
+    const s = simulatedClients[clientId];
+    if (!s) return sendJson(res, 404, { ok: false, error: 'no such client' });
+    try {
+      if (abrupt === '1' || abrupt === 'true') {
+        // immediate tear-down without TLS close_notify / graceful shutdown
+        try { s.destroy(); } catch (e) {}
+        delete simulatedClients[clientId];
+        broadcast({ type: 'CLIENT_DISCONNECTED', clientId, abrupt: true, timestamp: new Date().toISOString() });
+        return sendJson(res, 200, { ok: true, clientId, abrupt: true });
+      }
+      // graceful
+      try { s.end(); s.destroy(); } catch (e) {}
+      delete simulatedClients[clientId];
+      broadcast({ type: 'CLIENT_DISCONNECTED', clientId, timestamp: new Date().toISOString() });
+      return sendJson(res, 200, { ok: true, clientId });
+    } catch (e) {
+      return sendJson(res, 500, { ok: false, error: e.message });
+    }
+  }
+
   // GET /polls/:id/votes -> list votes (userId, choiceId)
   if (req.method === 'GET' && url.pathname.startsWith('/polls/') && url.pathname.endsWith('/votes')) {
     const parts = url.pathname.split('/');
@@ -330,6 +361,75 @@ const apiServer = http.createServer((req, res) => {
     db.all(`SELECT userId,choiceId,createdAt FROM votes WHERE pollId = ?`, [pollId], (err, rows) => {
       if (err) return sendJson(res, 500, { ok: false, error: err.message });
       return sendJson(res, 200, { ok: true, votes: rows || [] });
+    });
+    return;
+  }
+
+  // POST /simulate/burst -> { clientId, pollId, choiceId, count, delayMs, uniqueClients }
+  if (req.method === 'POST' && url.pathname === '/simulate/burst') {
+    let buf = '';
+    req.on('data', (c) => (buf += c.toString()));
+    req.on('end', async () => {
+      try {
+        const data = JSON.parse(buf || '{}');
+        const clientId = data.clientId || `sim-${Date.now()}`;
+        const pollId = data.pollId || 'poll-1';
+        const choiceId = data.choiceId;
+        const count = parseInt(data.count || 10, 10);
+        const delayMs = parseInt(data.delayMs || 10, 10);
+        const uniqueClients = (data.uniqueClients === undefined) ? true : !!data.uniqueClients;
+        if (!choiceId) return sendJson(res, 400, { ok: false, error: 'missing choiceId' });
+
+        // helper to perform a single vote (promise)
+        function performVote(voterId) {
+          return new Promise((resolve) => {
+            const createdAt = new Date().toISOString();
+            db.serialize(() => {
+              db.run('BEGIN TRANSACTION');
+              db.get(`SELECT 1 FROM polls WHERE id = ?`, [pollId], (err0, r0) => {
+                if (err0) { db.run('ROLLBACK'); return resolve({ ok: false, error: err0.message }); }
+                if (!r0) { db.run('ROLLBACK'); return resolve({ ok: false, error: 'no poll' }); }
+                db.get(`SELECT 1 FROM votes WHERE pollId = ? AND userId = ?`, [pollId, voterId], (err1, r1) => {
+                  if (err1) { db.run('ROLLBACK'); return resolve({ ok: false, error: err1.message }); }
+                  if (r1) { db.run('ROLLBACK'); return resolve({ ok: false, error: 'already voted' }); }
+                  db.run(`INSERT INTO votes (pollId,userId,choiceId,createdAt) VALUES (?,?,?,?)`, [pollId, voterId, choiceId, createdAt], function (err2) {
+                    if (err2) { db.run('ROLLBACK'); return resolve({ ok: false, error: err2.message }); }
+                    db.run('COMMIT');
+                    // compute counts and broadcast
+                    getPollCounts(pollId, (errc, counts) => {
+                      if (errc) return resolve({ ok: false, error: errc.message });
+                      const payload = { type: 'POLL_UPDATE', pollId, counts, change: { choiceId, delta: 1 }, timestamp: new Date().toISOString() };
+                      const logPayload = { type: 'LOG', level: 'INFO', subtype: 'VOTE', clientId: voterId, message: `VOTE ${pollId} ${choiceId}`, timestamp: new Date().toISOString() };
+                      broadcast(payload);
+                      broadcast(logPayload);
+                      resolve({ ok: true, counts });
+                    });
+                  });
+                });
+              });
+            });
+          });
+        }
+
+        const results = [];
+        for (let i = 0; i < count; i++) {
+          const voterId = uniqueClients ? `${clientId}-${i}` : clientId;
+          // create the simulated client socket if requested (best-effort)
+          if (uniqueClients) createSimulatedClient(voterId, data.socketOptions || {});
+          // perform vote
+          // eslint-disable-next-line no-await-in-loop
+          const r = await performVote(voterId);
+          results.push({ voterId, result: r });
+          // throttle
+          // eslint-disable-next-line no-await-in-loop
+          await new Promise((r2) => setTimeout(r2, delayMs));
+        }
+
+        // return overall results
+        return sendJson(res, 200, { ok: true, attempted: count, uniqueClients, results });
+      } catch (e) {
+        return sendJson(res, 400, { ok: false, error: 'invalid json' });
+      }
     });
     return;
   }

@@ -14,7 +14,8 @@ export default function ConnectionTable({ clients, onSend, onRefresh }) {
       {rows.length === 0 ? (
         <div className="text-gray-400">No clients connected — waiting...</div>
       ) : (
-        <table className="w-full text-sm">
+        <div className="w-full text-sm max-h-80 overflow-auto">
+          <table className="w-full">
           <thead className="text-left text-gray-400">
             <tr><th>#</th><th>Client</th><th>Status</th><th>Connected</th><th>Msgs</th><th>Bytes</th><th>Actions</th></tr>
           </thead>
@@ -37,7 +38,8 @@ export default function ConnectionTable({ clients, onSend, onRefresh }) {
               </tr>
             ))}
           </tbody>
-        </table>
+          </table>
+        </div>
       )}
     </div>
   )

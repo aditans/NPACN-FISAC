@@ -26,6 +26,9 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <pthread.h>
+#include <sys/stat.h>
+#include <stdio.h>
+#include <sqlite3.h>
 
 #include "../include/polling.h"
 
@@ -38,6 +41,8 @@ static char g_cosmos_db_id[128];
 static db_vote_record_t g_vote_ledger[POLLING_MAX_VOTE_LEDGER];
 static size_t g_vote_ledger_count = 0;
 static pthread_mutex_t g_vote_ledger_lock = PTHREAD_MUTEX_INITIALIZER;
+static sqlite3* g_sqlite_db = NULL;
+static int g_use_sqlite = 0;
 
 static const char* env_pick(const char* a, const char* b) {
     const char* v = getenv(a);
@@ -142,13 +147,40 @@ int polling_db_init(polling_server_t* server) {
     memset(g_cosmos_key, 0, sizeof(g_cosmos_key));
     memset(g_cosmos_db_id, 0, sizeof(g_cosmos_db_id));
 
-    if (!endpoint || !*endpoint) {
-        polling_log_error("Cosmos precheck failed: set COSMOS_ENDPOINT (or AZURE_COSMOS_ENDPOINT)");
-        return -1;
-    }
-    if (!key || !*key) {
-        polling_log_error("Cosmos precheck failed: set COSMOS_KEY (or AZURE_COSMOS_KEY)");
-        return -1;
+    if (!endpoint || !*endpoint || !key || !*key) {
+        polling_log_warning("COSMOS env missing or incomplete; falling back to local SQLite backend");
+        /* Attempt to initialize SQLite at server->db_path, creating directories if needed */
+        const char* dbpath = server->db_path && server->db_path[0] ? server->db_path : "/tmp/polling_votes.db";
+        /* Ensure directory exists */
+        char dirbuf[512];
+        strncpy(dirbuf, dbpath, sizeof(dirbuf)-1);
+        char* lastslash = strrchr(dirbuf, '/');
+        if (lastslash) {
+            *lastslash = '\0';
+            /* try to create dir if not exists */
+            (void)mkdir(dirbuf, 0755);
+        }
+        int rc = sqlite3_open(dbpath, &g_sqlite_db);
+        if (rc != SQLITE_OK) {
+            polling_log_error("SQLite fallback failed to open DB %s: %s", dbpath, sqlite3_errmsg(g_sqlite_db));
+            if (g_sqlite_db) sqlite3_close(g_sqlite_db);
+            return -1;
+        }
+        /* create votes table if not exists */
+        const char* create_sql = "CREATE TABLE IF NOT EXISTS votes (pollId TEXT, userId TEXT, choiceId TEXT, createdAt TEXT, PRIMARY KEY(pollId,userId));";
+        char* err = NULL;
+        rc = sqlite3_exec(g_sqlite_db, create_sql, NULL, NULL, &err);
+        if (rc != SQLITE_OK) {
+            polling_log_error("SQLite table creation failed: %s", err ? err : "unknown");
+            if (err) sqlite3_free(err);
+            sqlite3_close(g_sqlite_db);
+            g_sqlite_db = NULL;
+            return -1;
+        }
+        g_use_sqlite = 1;
+        server->db_fd = 2; /* mark sqlite backend */
+        polling_log_info("Polling DB backend initialized using SQLite (%s)", dbpath);
+        return 0;
     }
     if (!db_id || !*db_id) {
         db_id = "npacn";
@@ -164,7 +196,36 @@ int polling_db_init(polling_server_t* server) {
 
     polling_log_info("Running Cosmos prechecks for polling backend...");
     if (cosmos_precheck_dns_and_tcp_443(g_cosmos_endpoint) < 0) {
-        return -1;
+        polling_log_warning("Cosmos precheck failed; attempting SQLite fallback");
+        /* Try SQLite fallback same as missing envs */
+        const char* dbpath = server->db_path && server->db_path[0] ? server->db_path : "/tmp/polling_votes.db";
+        char dirbuf[512];
+        strncpy(dirbuf, dbpath, sizeof(dirbuf)-1);
+        char* lastslash = strrchr(dirbuf, '/');
+        if (lastslash) {
+            *lastslash = '\0';
+            (void)mkdir(dirbuf, 0755);
+        }
+        int rc = sqlite3_open(dbpath, &g_sqlite_db);
+        if (rc != SQLITE_OK) {
+            polling_log_error("SQLite fallback failed to open DB %s: %s", dbpath, sqlite3_errmsg(g_sqlite_db));
+            if (g_sqlite_db) sqlite3_close(g_sqlite_db);
+            return -1;
+        }
+        const char* create_sql = "CREATE TABLE IF NOT EXISTS votes (pollId TEXT, userId TEXT, choiceId TEXT, createdAt TEXT, PRIMARY KEY(pollId,userId));";
+        char* err = NULL;
+        rc = sqlite3_exec(g_sqlite_db, create_sql, NULL, NULL, &err);
+        if (rc != SQLITE_OK) {
+            polling_log_error("SQLite table creation failed: %s", err ? err : "unknown");
+            if (err) sqlite3_free(err);
+            sqlite3_close(g_sqlite_db);
+            g_sqlite_db = NULL;
+            return -1;
+        }
+        g_use_sqlite = 1;
+        server->db_fd = 2;
+        polling_log_info("Polling DB backend initialized using SQLite (%s)", dbpath);
+        return 0;
     }
 
     pthread_mutex_lock(&g_vote_ledger_lock);
@@ -182,6 +243,25 @@ int polling_db_check_duplicate_vote(polling_server_t* server, uint32_t user_id, 
 
     if (!server || server->db_fd < 0) {
         return -1;
+    }
+    if (g_use_sqlite && g_sqlite_db) {
+        /* Query SQLite votes table */
+        const char* sql = "SELECT 1 FROM votes WHERE pollId = ? AND userId = ? LIMIT 1;";
+        sqlite3_stmt* stmt = NULL;
+        char pollbuf[32];
+        char userbuf[32];
+        snprintf(pollbuf, sizeof(pollbuf), "%u", poll_id);
+        snprintf(userbuf, sizeof(userbuf), "%u", user_id);
+        if (sqlite3_prepare_v2(g_sqlite_db, sql, -1, &stmt, NULL) != SQLITE_OK) {
+            if (stmt) sqlite3_finalize(stmt);
+            return -1;
+        }
+        sqlite3_bind_text(stmt, 1, pollbuf, -1, SQLITE_STATIC);
+        sqlite3_bind_text(stmt, 2, userbuf, -1, SQLITE_STATIC);
+        int rc = sqlite3_step(stmt);
+        int found = (rc == SQLITE_ROW) ? 1 : 0;
+        sqlite3_finalize(stmt);
+        return found;
     }
 
     pthread_mutex_lock(&g_vote_ledger_lock);
@@ -204,6 +284,42 @@ int polling_db_record_vote(polling_server_t* server, const db_vote_record_t* vot
     if (server->db_fd < 0) {
         polling_log_error("DB backend not initialized");
         return -1;
+    }
+    if (g_use_sqlite && g_sqlite_db) {
+        /* Use SQLite to insert vote transactionally */
+        char pollbuf[32];
+        char userbuf[32];
+        char optbuf[32];
+        snprintf(pollbuf, sizeof(pollbuf), "%u", vote->poll_id);
+        snprintf(userbuf, sizeof(userbuf), "%u", vote->user_id);
+        snprintf(optbuf, sizeof(optbuf), "%u", vote->option_id);
+        /* Check duplicate */
+        if (polling_db_check_duplicate_vote(server, vote->user_id, vote->poll_id) == 1) {
+            polling_log_warning("Duplicate vote blocked: user_id=%u poll_id=%u", vote->user_id, vote->poll_id);
+            return -1;
+        }
+        const char* sql = "INSERT INTO votes (pollId,userId,choiceId,createdAt) VALUES (?,?,?,?);";
+        sqlite3_stmt* stmt = NULL;
+        if (sqlite3_prepare_v2(g_sqlite_db, sql, -1, &stmt, NULL) != SQLITE_OK) {
+            if (stmt) sqlite3_finalize(stmt);
+            polling_log_error("SQLite prepare failed: %s", sqlite3_errmsg(g_sqlite_db));
+            return -1;
+        }
+        sqlite3_bind_text(stmt, 1, pollbuf, -1, SQLITE_STATIC);
+        sqlite3_bind_text(stmt, 2, userbuf, -1, SQLITE_STATIC);
+        sqlite3_bind_text(stmt, 3, optbuf, -1, SQLITE_STATIC);
+        char timebuf[64];
+        snprintf(timebuf, sizeof(timebuf), "%ld", (long)time(NULL));
+        sqlite3_bind_text(stmt, 4, timebuf, -1, SQLITE_STATIC);
+        int rc = sqlite3_step(stmt);
+        if (rc != SQLITE_DONE) {
+            polling_log_error("SQLite insert failed: %s", sqlite3_errmsg(g_sqlite_db));
+            sqlite3_finalize(stmt);
+            return -1;
+        }
+        sqlite3_finalize(stmt);
+        polling_log_info("Vote stored (sqlite): user_id=%u poll_id=%u option_id=%u", vote->user_id, vote->poll_id, vote->option_id);
+        return 0;
     }
 
     if (polling_db_check_duplicate_vote(server, vote->user_id, vote->poll_id) == 1) {
@@ -242,6 +358,26 @@ int polling_db_get_vote_count(polling_server_t* server, uint32_t poll_id, uint32
     if (!server || server->db_fd < 0) {
         return -1;
     }
+    if (g_use_sqlite && g_sqlite_db) {
+        const char* sql = "SELECT COUNT(1) FROM votes WHERE pollId = ? AND choiceId = ?;";
+        sqlite3_stmt* stmt = NULL;
+        char pollbuf[32];
+        char optbuf[32];
+        snprintf(pollbuf, sizeof(pollbuf), "%u", poll_id);
+        snprintf(optbuf, sizeof(optbuf), "%u", option_id);
+        if (sqlite3_prepare_v2(g_sqlite_db, sql, -1, &stmt, NULL) != SQLITE_OK) {
+            if (stmt) sqlite3_finalize(stmt);
+            return -1;
+        }
+        sqlite3_bind_text(stmt, 1, pollbuf, -1, SQLITE_STATIC);
+        sqlite3_bind_text(stmt, 2, optbuf, -1, SQLITE_STATIC);
+        int rc = sqlite3_step(stmt);
+        if (rc == SQLITE_ROW) {
+            count = sqlite3_column_int(stmt, 0);
+        }
+        sqlite3_finalize(stmt);
+        return count;
+    }
 
     pthread_mutex_lock(&g_vote_ledger_lock);
     for (i = 0; i < g_vote_ledger_count; i++) {
@@ -277,7 +413,11 @@ void polling_db_close(polling_server_t* server) {
     if (!server) {
         return;
     }
-
+    if (g_use_sqlite && g_sqlite_db) {
+        sqlite3_close(g_sqlite_db);
+        g_sqlite_db = NULL;
+        g_use_sqlite = 0;
+    }
     server->db_fd = -1;
     polling_log_info("Polling DB backend closed");
 }

@@ -1,30 +1,118 @@
-[bridge] Starting Node bridge - will connect to 127.0.0.1:8443
+[bridge] Starting Node bridge - will connect to 127.0.0.1:8080
 [bridge] WebSocket bridge listening on port 3001
 [bridge] HTTP API listening on port 3002
-[bridge] simulated client error client-e2e-test 80A86A55547F0000:error:0A00010B:SSL routines:tls_validate_record_header:wrong version number:../ssl/record/methods/tlsany_meth.c:84:
-
+[bridge] Frontend connected via WebSocket
+[bridge] Frontend connected via WebSocket
+[bridge] simulated client connected client-1774899850094
+[bridge] simulated client connected sim-1774900106451-0
+[bridge] simulated client connected sim-1774900106451-1
+[bridge] simulated client connected sim-1774900106451-2
+[bridge] simulated client connected sim-1774900106451-3
+[bridge] simulated client connected sim-1774900106451-4
+[bridge] Frontend connected via WebSocket
+[bridge] Frontend connected via WebSocket
+[bridge] simulated client connected client-1774900251336
+[bridge] simulated client connected sim-1774900319020-0
+[bridge] simulated client connected sim-1774900319020-1
+[bridge] simulated client connected sim-1774900319020-2
+[bridge] simulated client connected sim-1774900319020-3
+[bridge] simulated client connected sim-1774900319020-4
+[bridge] simulated client connected sim-1774900319020-5
+[bridge] simulated client connected sim-1774900319020-6
+[bridge] simulated client connected sim-1774900319020-7
+[bridge] simulated client connected sim-1774900319020-8
+[bridge] simulated client connected sim-1774900319020-9
+[bridge] simulated client connected sim-1774900319020-10
+[bridge] simulated client connected sim-1774900319020-11
+[bridge] simulated client connected sim-1774900319020-12
+[bridge] simulated client connected sim-1774900319020-13
+[bridge] simulated client connected sim-1774900319020-14
+[bridge] simulated client connected sim-1774900319020-15
+[bridge] simulated client connected sim-1774900319020-16
+[bridge] simulated client connected sim-1774900319020-17
+[bridge] simulated client connected sim-1774900319020-18
+[bridge] simulated client connected sim-1774900319020-19
+[bridge] simulated client connected sim-1774900319020-20
+[bridge] simulated client connected sim-1774900319020-21
+[bridge] simulated client connected sim-1774900319020-22
+[bridge] simulated client connected sim-1774900319020-23
+[bridge] simulated client connected sim-1774900319020-24
+[bridge] simulated client connected sim-1774900319020-25
+[bridge] simulated client connected sim-1774900319020-26
+[bridge] simulated client connected sim-1774900319020-27
+[bridge] simulated client connected sim-1774900319020-28
+[bridge] simulated client connected sim-1774900319020-29
+[bridge] simulated client connected sim-1774900319020-30
+[bridge] simulated client connected sim-1774900319020-31
+[bridge] simulated client connected sim-1774900319020-32
+[bridge] simulated client connected sim-1774900319020-33
+[bridge] simulated client connected sim-1774900319020-34
+[bridge] simulated client connected sim-1774900319020-35
+[bridge] simulated client connected sim-1774900319020-36
+[bridge] simulated client connected sim-1774900319020-37
+[bridge] simulated client connected sim-1774900319020-38
+[bridge] simulated client connected sim-1774900319020-39
+[bridge] simulated client connected sim-1774900319020-40
+[bridge] simulated client connected sim-1774900319020-41
+[bridge] simulated client connected sim-1774900319020-42
+[bridge] simulated client connected sim-1774900319020-43
+[bridge] simulated client connected sim-1774900319020-44
+[bridge] simulated client connected sim-1774900319020-45
+[bridge] simulated client connected sim-1774900319020-46
+[bridge] simulated client connected sim-1774900319020-47
+[bridge] simulated client connected sim-1774900319020-48
+[bridge] simulated client connected sim-1774900319020-49
+[bridge] simulated client connected sim-1774900319020-50
+[bridge] simulated client connected sim-1774900319020-51
+[bridge] simulated client connected sim-1774900319020-52
+[bridge] simulated client connected sim-1774900319020-53
+[bridge] simulated client connected sim-1774900319020-54
+[bridge] simulated client connected sim-1774900319020-55
+[bridge] simulated client connected sim-1774900319020-56
+[bridge] simulated client connected sim-1774900319020-57
+[bridge] simulated client connected sim-1774900319020-58
+[bridge] simulated client connected sim-1774900319020-59
+[bridge] simulated client connected sim-1774900319020-60
+[bridge] simulated client connected sim-1774900319020-61
+[bridge] simulated client connected sim-1774900319020-62
+[bridge] simulated client connected sim-1774900319020-63
+[bridge] simulated client connected sim-1774900319020-64
+[bridge] simulated client connected sim-1774900319020-65
+[bridge] simulated client connected sim-1774900319020-66
+[bridge] simulated client connected sim-1774900319020-67
+[bridge] simulated client connected sim-1774900319020-68
+[bridge] simulated client connected sim-1774900319020-69
+[bridge] simulated client connected sim-1774900319020-70
+[bridge] simulated client connected sim-1774900319020-71
+[bridge] simulated client connected sim-1774900319020-72
+[bridge] simulated client connected sim-1774900319020-73
+[bridge] simulated client connected sim-1774900319020-74
+[bridge] simulated client connected sim-1774900319020-75
+[bridge] simulated client connected sim-1774900319020-76
+[bridge] simulated client connected sim-1774900319020-77
+[bridge] simulated client connected sim-1774900319020-78
+[bridge] simulated client connected sim-1774900319020-79
+[bridge] simulated client connected sim-1774900319020-80
+[bridge] simulated client connected sim-1774900319020-81
+[bridge] simulated client connected sim-1774900319020-82
+[bridge] simulated client connected sim-1774900319020-83
+[bridge] simulated client connected sim-1774900319020-84
+[bridge] simulated client connected sim-1774900319020-85
+[bridge] simulated client connected sim-1774900319020-86
+[bridge] simulated client connected sim-1774900319020-87
+[bridge] simulated client connected sim-1774900319020-88
+[bridge] simulated client connected sim-1774900319020-89
+[bridge] simulated client connected sim-1774900319020-90
+[bridge] simulated client connected sim-1774900319020-91
+[bridge] simulated client connected sim-1774900319020-92
+[bridge] simulated client connected sim-1774900319020-93
+[bridge] simulated client connected sim-1774900319020-94
+[bridge] simulated client connected sim-1774900319020-95
+[bridge] simulated client connected sim-1774900319020-96
+[bridge] simulated client connected sim-1774900319020-97
+[bridge] simulated client connected sim-1774900319020-98
+[bridge] simulated client connected sim-1774900319020-99
 [bridge] Frontend connected via WebSocket
 [bridge] Frontend connected via WebSocket
 [bridge] Frontend connected via WebSocket
-[bridge] Frontend connected via WebSocket
-[bridge] Frontend connected via WebSocket
-[bridge] Frontend connected via WebSocket
-[bridge] simulated client error client-1774895024484 80A86A55547F0000:error:0A00010B:SSL routines:tls_validate_record_header:wrong version number:../ssl/record/methods/tlsany_meth.c:84:
-
-[bridge] simulated client error client-1774895065031 80A86A55547F0000:error:0A00010B:SSL routines:tls_validate_record_header:wrong version number:../ssl/record/methods/tlsany_meth.c:84:
-
-[bridge] simulated client error client-1774895104190 80A86A55547F0000:error:0A00010B:SSL routines:tls_validate_record_header:wrong version number:../ssl/record/methods/tlsany_meth.c:84:
-
-[bridge] simulated client error client-1774895115207 80A86A55547F0000:error:0A00010B:SSL routines:tls_validate_record_header:wrong version number:../ssl/record/methods/tlsany_meth.c:84:
-
-[bridge] Frontend connected via WebSocket
-[bridge] Frontend connected via WebSocket
-[bridge] Frontend connected via WebSocket
-[bridge] Frontend connected via WebSocket
-[bridge] Frontend connected via WebSocket
-[bridge] Frontend connected via WebSocket
-[bridge] Frontend connected via WebSocket
-[bridge] simulated client error client-1774895406777 write EPROTO 80A86A55547F0000:error:0A00010B:SSL routines:tls_validate_record_header:wrong version number:../ssl/record/methods/tlsany_meth.c:84:
-
-[bridge] simulated client error client-1774895416529 write EPROTO 80A86A55547F0000:error:0A00010B:SSL routines:tls_validate_record_header:wrong version number:../ssl/record/methods/tlsany_meth.c:84:
-
+[bridge] simulated client connected client-1774900415018

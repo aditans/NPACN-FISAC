@@ -7,6 +7,8 @@ import TerminalLog from './TerminalLog'
 export default function ClientPage({ clientId, onSend, logs = [], wsReady = false, clientState = null, onRefresh = null }) {
   const [createStatus, setCreateStatus] = useState('')
   const [showTerminal, setShowTerminal] = useState(true)
+  const [voters, setVoters] = useState([])
+  const [selectedVoter, setSelectedVoter] = useState(clientId || 'anon')
   const sendRef = useRef(onSend)
   const connectedOnceRef = useRef(false)
   const isConnected = clientState?.status === 'connected'
@@ -14,6 +16,30 @@ export default function ClientPage({ clientId, onSend, logs = [], wsReady = fals
   useEffect(() => {
     sendRef.current = onSend
   }, [onSend])
+
+  // Load recent voters for the default poll to populate the dropdown
+  useEffect(() => {
+    let mounted = true
+    async function fetchVoters() {
+      try {
+        const res = await fetch(`${API_BASE}/polls/poll-1/votes`)
+        const j = await res.json()
+        if (!mounted) return
+        if (j && j.ok && Array.isArray(j.votes)) {
+          const ids = j.votes.map(v => v.userId).filter(Boolean)
+          // include clientId as a top option
+          const uniqueIds = Array.from(new Set([clientId || 'anon', ...ids]))
+          setVoters(uniqueIds)
+          if (!selectedVoter) setSelectedVoter(uniqueIds[0])
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+    fetchVoters()
+    const iv = setInterval(fetchVoters, 5000)
+    return () => { mounted = false; clearInterval(iv) }
+  }, [clientId])
 
   useEffect(() => {
     // request bridge to create simulated client once WS is actually ready
@@ -68,6 +94,12 @@ export default function ClientPage({ clientId, onSend, logs = [], wsReady = fals
           <div className="text-xs text-gray-400">Interactive command-line client with live polls and activity stream.</div>
         </div>
         <div className="flex items-center gap-3">
+          {/* Voter selector for manual actions / bursts */}
+          <select value={selectedVoter} onChange={(e) => setSelectedVoter(e.target.value)} className="bg-gray-800 text-sm text-gray-200 px-2 py-1 rounded">
+            {(voters && voters.length ? voters : ['anon']).map(v => (
+              <option key={v} value={v}>{v}</option>
+            ))}
+          </select>
           <span className={`text-xs px-2 py-1 rounded ${isConnected ? 'bg-green-900 text-green-300' : 'bg-gray-800 text-gray-300'}`}>
             {isConnected ? 'Connected' : 'Disconnected'}
           </span>
@@ -107,6 +139,62 @@ export default function ClientPage({ clientId, onSend, logs = [], wsReady = fals
             disabled={!wsReady}
           >
             {isConnected ? 'Disconnect from Server' : 'Connect to Server'}
+          </button>
+          <button
+            className={`px-3 py-1 rounded text-sm bg-red-500 hover:bg-red-400 ${!clientId ? 'opacity-60 cursor-not-allowed' : ''}`}
+            onClick={async () => {
+              if (!clientId) return;
+              try {
+                // graceful disconnect via bridge API
+                await fetch(`${API_BASE}/client/${encodeURIComponent(clientId)}/disconnect`, { method: 'POST' });
+                try { onRefresh && onRefresh() } catch (e) {}
+              } catch (e) {
+                console.error('graceful disconnect error', e);
+              }
+            }}
+            title="Request graceful disconnect of the simulated client (sends FIN/close_notify)">
+            Disconnect from Server
+          </button>
+          <button
+            className={`px-3 py-1 rounded text-sm bg-red-700 hover:bg-red-600 ${!clientId ? 'opacity-60 cursor-not-allowed' : ''}`}
+            onClick={async () => {
+              if (!clientId) return;
+              try {
+                await fetch(`${API_BASE}/client/${encodeURIComponent(clientId)}/disconnect?abrupt=1`, { method: 'POST' });
+                try { onRefresh && onRefresh() } catch (e) {}
+              } catch (e) {
+                console.error('abrupt disconnect error', e);
+              }
+            }}
+            title="Abruptly tear down the simulated client TCP/TLS socket"
+          >
+            Abrupt Disconnect
+          </button>
+          <button
+            className={`px-3 py-1 rounded text-sm bg-violet-600 hover:bg-violet-500 ${!clientId ? 'opacity-60 cursor-not-allowed' : ''}`}
+            onClick={async () => {
+              if (!clientId) return;
+              const countStr = window.prompt('How many votes to send in burst? (e.g. 50)', '50');
+              if (!countStr) return;
+              const count = parseInt(countStr, 10) || 50;
+              const delayStr = window.prompt('Delay between votes (ms)', '10');
+              const delayMs = parseInt(delayStr, 10) || 10;
+              const unique = window.confirm('Use unique simulated clients for each vote? (OK = yes)');
+              try {
+                const res = await fetch(`${API_BASE}/simulate/burst`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ clientId: unique ? clientId : (selectedVoter || clientId), pollId: 'poll-1', choiceId: 'c', count, delayMs, uniqueClients: unique })
+                });
+                const j = await res.json();
+                console.log('burst result', j);
+                try { onRefresh && onRefresh() } catch (e) {}
+              } catch (e) {
+                console.error('burst error', e);
+              }
+            }}
+            title="Trigger rapid voting burst (use unique clients to bypass per-user vote constraints)">
+            Rapid Vote Burst
           </button>
           <button
             className={`px-3 py-1 rounded text-sm bg-amber-600 hover:bg-amber-500 ${!wsReady ? 'opacity-60 cursor-not-allowed' : ''}`}

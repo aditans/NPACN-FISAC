@@ -271,7 +271,14 @@ polling_server_t* polling_server_create(uint16_t port, int max_clients) {
     }
 
     server->poll_count = 0;
-    snprintf(server->db_path, sizeof(server->db_path), "/var/lib/polling/votes.db");
+    /* Allow overriding DB path via environment for local dev (avoids needing root-owned /var/lib) */
+    const char* env_db_path = getenv("POLLING_DB_PATH");
+    if (env_db_path && env_db_path[0]) {
+        snprintf(server->db_path, sizeof(server->db_path), "%s", env_db_path);
+        polling_log_info("DB path overridden from env: %s", server->db_path);
+    } else {
+        snprintf(server->db_path, sizeof(server->db_path), "/var/lib/polling/votes.db");
+    }
 
     polling_log_info("Server created: port=%d, max_clients=%d", port, max_clients);
     return server;

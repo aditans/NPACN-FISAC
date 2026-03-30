@@ -104,7 +104,7 @@ fi
 if [ -x ./polling_server ]; then
   echo "[start_all] Starting polling_server (background)"
   # Export COSMOS env if provided in caller environment
-  ( nohup env COSMOS_ENDPOINT="${COSMOS_ENDPOINT:-}" COSMOS_KEY="${COSMOS_KEY:-}" COSMOS_DB_ID="${COSMOS_DB_ID:-}" ./polling_server > "$LOGDIR/polling_server.log" 2>&1 & echo $! > "$LOGDIR/polling_server.pid" )
+  ( nohup env COSMOS_ENDPOINT="${COSMOS_ENDPOINT:-}" COSMOS_KEY="${COSMOS_KEY:-}" COSMOS_DB_ID="${COSMOS_DB_ID:-}" ./polling_server -p "$C_SERVER_PORT" -c "${POLLING_MAX_CLIENTS:-1024}" > "$LOGDIR/polling_server.log" 2>&1 & echo $! > "$LOGDIR/polling_server.pid" )
   sleep 1
 else
   echo "[start_all] polling_server binary not found at $PWD/polling_server"
