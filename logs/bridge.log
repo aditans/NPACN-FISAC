@@ -1,28 +1,30 @@
-[bridge] Starting Node bridge - will connect to 127.0.0.1:8080
-node:events:502
-      throw er; // Unhandled 'error' event
-      ^
+[bridge] Starting Node bridge - will connect to 127.0.0.1:8443
+[bridge] WebSocket bridge listening on port 3001
+[bridge] HTTP API listening on port 3002
+[bridge] simulated client error client-e2e-test 80A86A55547F0000:error:0A00010B:SSL routines:tls_validate_record_header:wrong version number:../ssl/record/methods/tlsany_meth.c:84:
 
-Error: listen EADDRINUSE: address already in use :::3001
-    at Server.setupListenHandle [as _listen2] (node:net:1902:16)
-    at listenInCluster (node:net:1959:12)
-    at Server.listen (node:net:2061:7)
-    at new WebSocketServer (/home/kali/Documents/NPACN-FISAC/polling-system/frontend/node_modules/ws/lib/websocket-server.js:106:20)
-    at Object.<anonymous> (/home/kali/Documents/NPACN-FISAC/polling-system/bridge.js:99:13)
-    at Module._compile (node:internal/modules/cjs/loader:1529:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
-    at Module.load (node:internal/modules/cjs/loader:1275:32)
-    at Module._load (node:internal/modules/cjs/loader:1096:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
-Emitted 'error' event on WebSocketServer instance at:
-    at Server.emit (node:events:524:28)
-    at emitErrorNT (node:net:1938:8)
-    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
-  code: 'EADDRINUSE',
-  errno: -98,
-  syscall: 'listen',
-  address: '::',
-  port: 3001
-}
+[bridge] Frontend connected via WebSocket
+[bridge] Frontend connected via WebSocket
+[bridge] Frontend connected via WebSocket
+[bridge] Frontend connected via WebSocket
+[bridge] Frontend connected via WebSocket
+[bridge] Frontend connected via WebSocket
+[bridge] simulated client error client-1774895024484 80A86A55547F0000:error:0A00010B:SSL routines:tls_validate_record_header:wrong version number:../ssl/record/methods/tlsany_meth.c:84:
 
-Node.js v20.19.4
+[bridge] simulated client error client-1774895065031 80A86A55547F0000:error:0A00010B:SSL routines:tls_validate_record_header:wrong version number:../ssl/record/methods/tlsany_meth.c:84:
+
+[bridge] simulated client error client-1774895104190 80A86A55547F0000:error:0A00010B:SSL routines:tls_validate_record_header:wrong version number:../ssl/record/methods/tlsany_meth.c:84:
+
+[bridge] simulated client error client-1774895115207 80A86A55547F0000:error:0A00010B:SSL routines:tls_validate_record_header:wrong version number:../ssl/record/methods/tlsany_meth.c:84:
+
+[bridge] Frontend connected via WebSocket
+[bridge] Frontend connected via WebSocket
+[bridge] Frontend connected via WebSocket
+[bridge] Frontend connected via WebSocket
+[bridge] Frontend connected via WebSocket
+[bridge] Frontend connected via WebSocket
+[bridge] Frontend connected via WebSocket
+[bridge] simulated client error client-1774895406777 write EPROTO 80A86A55547F0000:error:0A00010B:SSL routines:tls_validate_record_header:wrong version number:../ssl/record/methods/tlsany_meth.c:84:
+
+[bridge] simulated client error client-1774895416529 write EPROTO 80A86A55547F0000:error:0A00010B:SSL routines:tls_validate_record_header:wrong version number:../ssl/record/methods/tlsany_meth.c:84:
+

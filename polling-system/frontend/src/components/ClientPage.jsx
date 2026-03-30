@@ -73,15 +73,15 @@ export default function ClientPage({ clientId, onSend, logs = [], wsReady = fals
           </span>
           <button className="px-3 py-1 rounded text-sm bg-sky-700 hover:bg-sky-600" onClick={() => { setShowTerminal(s => !s); if (!showTerminal) setTimeout(() => { const el = document.getElementById('client-terminal-panel'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 80) }}>{showTerminal ? 'Hide Activity' : 'Open Activity Terminal'}</button>
           <button
-            className="px-3 py-1 rounded text-sm bg-slate-700 hover:bg-slate-600"
+            className={`px-3 py-1 rounded text-sm ${createStatus === 'registering' ? 'bg-gray-500 cursor-not-allowed' : 'bg-slate-700 hover:bg-slate-600'}`}
             onClick={async () => {
-              if (!clientId) return
-              setCreateStatus('creating')
+              if (!clientId || createStatus === 'registering') return
+              setCreateStatus('registering')
               try {
                 const res = await fetch(`${API_BASE}/client`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ clientId }) })
                 const j = await res.json()
                 if (j && j.ok) {
-                  setCreateStatus('created')
+                  setCreateStatus('registered')
                   try { onRefresh && onRefresh() } catch (e) {}
                 } else {
                   setCreateStatus('error')
@@ -91,8 +91,14 @@ export default function ClientPage({ clientId, onSend, logs = [], wsReady = fals
               }
               setTimeout(() => setCreateStatus(''), 2000)
             }}
+            disabled={createStatus === 'registering'}
           >
-            Create (HTTP)
+            {createStatus === 'registering' ? (
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path></svg>
+                Registering...
+              </span>
+            ) : 'Register client'}
           </button>
           {createStatus ? <span className="text-xs text-gray-300">{createStatus}</span> : null}
           <button

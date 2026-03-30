@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef, useCallback } from 'react'
 import API_BASE from './apiBase'
 import ServerDashboard from './components/ServerDashboard'
 import Polls from './components/Polls'
+import ClientCreator from './components/ClientCreator'
+import TerminalLog from './components/TerminalLog'
 import StatusBar from './components/StatusBar'
 
 export default function App() {
@@ -56,6 +58,33 @@ export default function App() {
   }, [])
 
   const sendToBridge = useCallback((payload) => {
+    // optimistic client-side logging and stats so UI updates immediately
+    try {
+      const ts = new Date().toISOString()
+      setLogs((l) => {
+        const entry = {
+          type: payload && payload.action ? payload.action : 'RAW',
+          clientId: payload && payload.clientId,
+          message: payload && payload.data ? payload.data : (payload && payload.action ? payload.action : ''),
+          timestamp: ts,
+          optimistic: true,
+        }
+        return [...l, entry].slice(-500)
+      })
+    } catch (e) {}
+
+    // optimistic client stats for SEND actions
+    if (payload && payload.action === 'SEND' && payload.clientId) {
+      setClients(prev => {
+        const next = { ...prev }
+        next[payload.clientId] = next[payload.clientId] || { id: payload.clientId, msgs: 0, bytes: 0 }
+        next[payload.clientId].msgs = (next[payload.clientId].msgs || 0) + 1
+        next[payload.clientId].bytes = (next[payload.clientId].bytes || 0) + (payload.data ? String(payload.data).length : 0)
+        next[payload.clientId].status = next[payload.clientId].status || 'connected'
+        return next
+      })
+    }
+
     if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
       wsRef.current.send(JSON.stringify(payload))
     }
@@ -150,13 +179,38 @@ export default function App() {
         return <ClientPage clientId={clientId} onSend={sendToBridge} logs={logs} wsReady={wsReady} clientState={clients[clientId]} onRefresh={refreshClients} />
       }
     } catch (e) {}
+    // generic client landing page (no clientId) — provide controls to create/open client pages
     return (
       <div className="h-screen p-3">
         <div className="mb-3 flex items-center justify-between">
-          <div className="text-lg font-semibold">Client Simulator</div>
+          <div>
+            <div className="text-lg font-semibold">Client Simulator</div>
+            <div className="text-sm text-gray-400">Create or open a client dashboard (each client gets its own page)</div>
+          </div>
           <a className="text-sm text-gray-400" href="/server">Open Server Dashboard</a>
         </div>
-        <Polls onSend={sendToBridge} logs={logs} />
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="lg:col-span-2">
+            <Polls onSend={sendToBridge} logs={logs} />
+          </div>
+
+          <div className="lg:col-span-1 bg-[#071024] border border-gray-800 p-3 rounded">
+            <div className="font-semibold mb-2">Quick Client Actions</div>
+            <ClientCreator onOpen={(id) => { window.open(`/client?clientId=${id}`, '_blank') }} onCreate={async (id) => {
+              try {
+                await fetch(`${API_BASE}/client`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ clientId: id }) })
+                // refresh authoritative list
+                try { refreshClients() } catch (e) {}
+              } catch (e) {}
+            }} />
+
+            <div className="mt-4">
+              <div className="font-semibold mb-2">Activity</div>
+              <TerminalLog logs={logs} />
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

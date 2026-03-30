@@ -1,6 +1,72 @@
-[ERROR] Cosmos precheck failed: set COSMOS_ENDPOINT (or AZURE_COSMOS_ENDPOINT)
-[ERROR] Database initialization failed
+nohup: ignoring input
 [INFO] Polling Server starting (version 1.0)
 [INFO] Server created: port=8443, max_clients=1024
-[INFO] Polling DB backend closed
-[INFO] Server destroyed
+[INFO] Running Cosmos prechecks for polling backend...
+[INFO] Cosmos precheck passed: DNS + TCP/443 reachable
+[INFO] Polling DB backend initialized with Cosmos prechecks (db_id=npacn)
+[DEBUG] Socket created: fd=4
+[DEBUG] SO_REUSEADDR enabled on socket 4
+[DEBUG] SO_KEEPALIVE configured on socket 4 (idle=60, intvl=10, cnt=5)
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Socket bound to [::]:/8443
+[INFO] Server listening on port 8443
+[INFO] Entering main accept loop
+[INFO] Accepted connection from ::ffff:127.0.0.1:46346 (fd=5)
+[DEBUG] SO_KEEPALIVE configured on socket 5 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 5
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:46346 (fd=5)
+[INFO] Client ::ffff:127.0.0.1:46346 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:46346
+[INFO] Disconnecting client ::ffff:127.0.0.1:46346 - Sent: 0 bytes, Received: 1577 bytes
+[INFO] Client ::ffff:127.0.0.1:46346 fully closed
+[INFO] Accepted connection from ::ffff:127.0.0.1:39110 (fd=6)
+[DEBUG] SO_KEEPALIVE configured on socket 6 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 6
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:39110 (fd=6)
+[INFO] Accepted connection from ::ffff:127.0.0.1:34436 (fd=5)
+[DEBUG] SO_KEEPALIVE configured on socket 5 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 5
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:34436 (fd=5)
+[INFO] Accepted connection from ::ffff:127.0.0.1:55578 (fd=7)
+[DEBUG] SO_KEEPALIVE configured on socket 7 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 7
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:55578 (fd=7)
+[INFO] Accepted connection from ::ffff:127.0.0.1:41896 (fd=8)
+[DEBUG] SO_KEEPALIVE configured on socket 8 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 8
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41896 (fd=8)
+[INFO] Client ::ffff:127.0.0.1:39110 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:39110
+[INFO] Disconnecting client ::ffff:127.0.0.1:39110 - Sent: 0 bytes, Received: 1577 bytes
+[INFO] Client ::ffff:127.0.0.1:39110 fully closed
+[INFO] Client ::ffff:127.0.0.1:34436 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:34436
+[INFO] Disconnecting client ::ffff:127.0.0.1:34436 - Sent: 0 bytes, Received: 1577 bytes
+[INFO] Client ::ffff:127.0.0.1:34436 fully closed
+[INFO] Client ::ffff:127.0.0.1:55578 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:55578
+[INFO] Disconnecting client ::ffff:127.0.0.1:55578 - Sent: 0 bytes, Received: 1577 bytes
+[INFO] Client ::ffff:127.0.0.1:55578 fully closed
+[INFO] Client ::ffff:127.0.0.1:41896 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41896
+[INFO] Disconnecting client ::ffff:127.0.0.1:41896 - Sent: 0 bytes, Received: 1577 bytes
+[INFO] Client ::ffff:127.0.0.1:41896 fully closed
+[INFO] Accepted connection from ::ffff:127.0.0.1:41520 (fd=9)
+[DEBUG] SO_KEEPALIVE configured on socket 9 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 9
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:41520 (fd=9)
+[INFO] Accepted connection from ::ffff:127.0.0.1:52800 (fd=5)
+[DEBUG] SO_KEEPALIVE configured on socket 5 (idle=60, intvl=10, cnt=5)
+[DEBUG] TCP_NODELAY enabled on socket 5
+[DEBUG] Socket buffers configured: RCV=65536, SND=65536
+[INFO] Client handler started for ::ffff:127.0.0.1:52800 (fd=5)
+[INFO] Client ::ffff:127.0.0.1:41520 sent FIN (graceful close)
+[INFO] Closing client ::ffff:127.0.0.1:41520
+[INFO] Disconnecting client ::ffff:127.0.0.1:41520 - Sent: 0 bytes, Received: 1577 bytes
+[INFO] Client ::ffff:127.0.0.1:4
