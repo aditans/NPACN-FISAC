@@ -353,3 +353,28 @@ If you want, I can:
 - Generate a short presentation (slides) summarizing the experiments and recommendations.
 
 Pick the next action and I will run/assemble the artifacts.
+
+## Contributions (role assignment)
+
+The work in this repository — design, implementation, experiments, and report — was completed by a single developer during the lab. To help structure the final submission and distribute responsibilities for writing up screenshots/logs and the presentation, the project is organized into four equal contribution roles below. These role assignments are for reporting and presentation purposes; if you would like actual names added in place of the placeholders (Person 1..4) provide them and I will update the document.
+
+- Person 1 — Architecture & transport (TCP lifecycle, WebSocket upgrade, TLS)
+  - Draft Sections 1 & 2 in this report
+  - Capture screenshots: `ss -ltnp` (server listen), TLS handshake log, WebSocket upgrade
+  - Validate TLS and WebSocket traces and provide the handshake logs
+
+- Person 2 — Concurrency & socket experiments
+  - Draft Sections 3 & 4 in this report
+  - Run socket-option experiments (TCP_NODELAY, SO_KEEPALIVE), capture `ps -L`/`pstack`, `ss -tanp` during abrupt disconnects
+  - Provide the experiment runner output directory listing and JSON artifacts
+
+- Person 3 — Database & logging
+  - Draft Sections 5 & 6 in this report
+  - Validate SQLite persistence, produce DB counts, and capture syslog/polling_server.log excerpts for commit and duplicate-block attempts
+  - Describe ACID behavior observed during crash/restart tests
+
+- Person 4 — Tests, malformed input, and results analysis
+  - Draft Sections 7 & 8 in this report
+  - Run malformed-frame tests, capture server reaction and logs, and assemble JSON/CSV experiment outputs and the final analysis and recommendations
+
+Honest note: if one person (you) completed most or all of the work, it's fine to keep the `Person N` placeholders and attribute the implementation to the primary author when submitting; the split above simply maps sections and screenshot capture tasks across four contributors for the final deliverable.
